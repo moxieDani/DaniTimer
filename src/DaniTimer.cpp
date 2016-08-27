@@ -2,7 +2,7 @@
 
 DaniTimer::DaniTimer()
 {
-#ifdef WIN32
+#if defined _WIN32 || _WIN64
 	QueryPerformanceFrequency(&frequency);
 #endif
 	startTimeSec = 0.0;
@@ -19,10 +19,10 @@ long double DaniTimer::getMeasureTime()
 {
     long double ret = 0;
     
-#if defined WIN32
+#if defined _WIN32 || _WIN64
     measureTime.QuadPart = 0;
     if ( QueryPerformanceCounter(&measureTime) )
-        ret = double(measureTime.QuadPart) / (double(frequency.QuadPart) / 1000000.0);
+        ret = double(measureTime.QuadPart) / (double(frequency.QuadPart));
 #elif defined __MACH__
     if ( KERN_SUCCESS == host_get_clock_service(mach_host_self(), REALTIME_CLOCK, &measureClock) )
     {

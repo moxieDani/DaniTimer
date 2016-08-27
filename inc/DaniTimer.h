@@ -1,7 +1,7 @@
 #ifndef DANI_TIMER_H_DEF
 #define DANI_TIMER_H_DEF
 
-#if defined WIN32
+#if defined _WIN32 || _WIN64
 #include<Windows.h>
 #elif defined __MACH__
 #include <mach/clock.h>
@@ -26,7 +26,7 @@ public:
 
 private:
     long double getMeasureTime();
-#if defined WIN32
+#if defined _WIN32 || _WIN64
 	LARGE_INTEGER frequency;
 	LARGE_INTEGER measureTime;
 #elif defined __MACH__
