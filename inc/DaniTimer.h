@@ -17,15 +17,15 @@ public:
 	~DaniTimer();
 	int start();
 	int stop();
-	long double getCurrentTimeMicroSec();
-    long double getCurrentTimeMilliSec();
-    long double getCurrentTimeSec();
-	long double getElapsedTimeMicroSec();
-    long double getElapsedTimeMilliSec();
-    long double getElapsedTimeSec();
+	unsigned long getCurrentTimeMicroSec();
+    unsigned long getCurrentTimeMilliSec();
+    unsigned long getCurrentTimeSec();
+	unsigned long getElapsedTimeMicroSec();
+    unsigned long getElapsedTimeMilliSec();
+    unsigned long getElapsedTimeSec();
 
 private:
-    long double getMeasureTime();
+    unsigned long getMeasureTime();
 #if defined _WIN32 || _WIN64
 	LARGE_INTEGER frequency;
 	LARGE_INTEGER measureTime;
@@ -35,10 +35,10 @@ private:
 #else
     struct timespec measureTime;
 #endif
-	long double startTimeSec;
-	long double stopTimeSec;
-	long double currentTimeSec;
-	long double elapsedTimeSec;
+	unsigned long startTimeSec;
+	unsigned long stopTimeSec;
+	unsigned long currentTimeSec;
+	unsigned long elapsedTimeSec;
 };
 
 #endif

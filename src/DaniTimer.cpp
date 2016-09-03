@@ -15,26 +15,25 @@ DaniTimer::~DaniTimer()
 {
 }
 
-long double DaniTimer::getMeasureTime()
+unsigned long DaniTimer::getMeasureTime()
 {
-    long double ret = 0;
+    unsigned long ret = 0;
     
-#if defined _WIN32 || _WIN64
+#if defined _WIN32 || _WIN64 //windows
     measureTime.QuadPart = 0;
     if ( QueryPerformanceCounter(&measureTime) )
-        ret = double(measureTime.QuadPart) / (double(frequency.QuadPart));
-#elif defined __MACH__
+        ret = measureTime.QuadPart / frequency.QuadPart) * 1e6;
+#elif defined __MACH__ //MacOS
     if ( KERN_SUCCESS == host_get_clock_service(mach_host_self(), REALTIME_CLOCK, &measureClock) )
     {
         if ( KERN_SUCCESS == clock_get_time(measureClock, &measureTime) )
-            ret = measureTime.tv_sec + double(measureTime.tv_nsec / 1e9);
+            ret = ( ( measureTime.tv_sec * 1e9 ) + measureTime.tv_nsec ) / 1e3;
         mach_port_deallocate(mach_task_self(), measureClock);
     }
-#else
+#else //Linux
     if( 0 == clock_gettime(CLOCK_MONOTONIC, &measureTime) )
-        ret = measureTime.tv_sec + double(measureTime.tv_nsec / 1e9);
+        ret = ( ( measureTime.tv_sec * 1e9 ) + measureTime.tv_nsec ) / 1e3;
 #endif
-    
     return ret;
 }
 
@@ -50,36 +49,36 @@ int DaniTimer::stop()
 	return stopTimeSec == 0 ? 1 : 0;
 }
 
-long double DaniTimer::getCurrentTimeSec()
+unsigned long DaniTimer::getCurrentTimeSec()
+{
+	return DaniTimer::getCurrentTimeMilliSec() / 1e3;
+}
+
+unsigned long DaniTimer::getCurrentTimeMilliSec()
+{
+    return DaniTimer::getCurrentTimeMicroSec() / 1e3;
+}
+
+unsigned long DaniTimer::getCurrentTimeMicroSec()
 {
     if ( startTimeSec > 0.0 )
         currentTimeSec = DaniTimer::getMeasureTime() - startTimeSec;
-	return currentTimeSec;
+    return currentTimeSec;
 }
 
-long double DaniTimer::getCurrentTimeMilliSec()
+unsigned long DaniTimer::getElapsedTimeSec()
 {
-    return DaniTimer::getCurrentTimeSec() * 1000.0;
+	return DaniTimer::getElapsedTimeMilliSec() / 1e3;
 }
 
-long double DaniTimer::getCurrentTimeMicroSec()
+unsigned long DaniTimer::getElapsedTimeMilliSec()
 {
-    return DaniTimer::getCurrentTimeMilliSec() * 1000.0;
+    return DaniTimer::getElapsedTimeMicroSec() / 1e3;
 }
 
-long double DaniTimer::getElapsedTimeSec()
+unsigned long DaniTimer::getElapsedTimeMicroSec()
 {
-	if (startTimeSec > 0.0 && stopTimeSec > 0.0)
-		elapsedTimeSec = stopTimeSec - startTimeSec;
-	return elapsedTimeSec;
-}
-
-long double DaniTimer::getElapsedTimeMilliSec()
-{
-    return DaniTimer::getElapsedTimeSec() * 1000.0;
-}
-
-long double DaniTimer::getElapsedTimeMicroSec()
-{
-    return DaniTimer::getElapsedTimeMilliSec() * 1000.0;
+    if (startTimeSec > 0.0 && stopTimeSec > 0.0)
+        elapsedTimeSec = stopTimeSec - startTimeSec;
+    return elapsedTimeSec;
 }
