@@ -2,17 +2,21 @@
 
 DaniTimer::DaniTimer()
 {
-#if defined _WIN32 || _WIN64
-	QueryPerformanceFrequency(&frequency);
-#endif
-	startTimeSec = 0.0;
-	stopTimeSec = 0.0;
-	currentTimeSec = 0.0;
-	elapsedTimeSec = 0.0;
+    init();
 }
 
 DaniTimer::~DaniTimer()
 {
+}
+
+int DaniTimer::init()
+{
+#if defined _WIN32 || _WIN64
+    QueryPerformanceFrequency(&frequency);
+#endif
+    startTimeSec = 0;
+    elapsedTimeSec = 0;
+    return 0;
 }
 
 unsigned long DaniTimer::getMeasureTime()
@@ -39,46 +43,56 @@ unsigned long DaniTimer::getMeasureTime()
 
 int DaniTimer::start()
 {
-    startTimeSec = DaniTimer::getMeasureTime();
-    return startTimeSec == 0 ? 1 : 0;
+    int ret = 1;
+    if (startTimeSec == 0)
+    {
+        startTimeSec = getMeasureTime();
+        ret = 0;
+    }
+    return ret;
 }
 
 int DaniTimer::stop()
 {
-    stopTimeSec = DaniTimer::getMeasureTime();
-	return stopTimeSec == 0 ? 1 : 0;
+    int ret = 1;
+    if ( startTimeSec > 0 && elapsedTimeSec == 0)
+    {
+        elapsedTimeSec = getMeasureTime() - startTimeSec;
+        startTimeSec = 0;
+        ret = 0;
+    }
+	return ret;
 }
 
 unsigned long DaniTimer::getCurrentTimeSec()
 {
-	return DaniTimer::getCurrentTimeMilliSec() / 1e3;
+	return getCurrentTimeMilliSec() / 1e3;
 }
 
 unsigned long DaniTimer::getCurrentTimeMilliSec()
 {
-    return DaniTimer::getCurrentTimeMicroSec() / 1e3;
+    return getCurrentTimeMicroSec() / 1e3;
 }
 
 unsigned long DaniTimer::getCurrentTimeMicroSec()
 {
-    if ( startTimeSec > 0.0 )
-        currentTimeSec = DaniTimer::getMeasureTime() - startTimeSec;
-    return currentTimeSec;
+    unsigned long ret = 0;
+    if ( startTimeSec > 0 && elapsedTimeSec == 0)
+        ret = getMeasureTime() - startTimeSec;
+    return ret;
 }
 
 unsigned long DaniTimer::getElapsedTimeSec()
 {
-	return DaniTimer::getElapsedTimeMilliSec() / 1e3;
+	return getElapsedTimeMilliSec() / 1e3;
 }
 
 unsigned long DaniTimer::getElapsedTimeMilliSec()
 {
-    return DaniTimer::getElapsedTimeMicroSec() / 1e3;
+    return getElapsedTimeMicroSec() / 1e3;
 }
 
 unsigned long DaniTimer::getElapsedTimeMicroSec()
 {
-    if (startTimeSec > 0.0 && stopTimeSec > 0.0)
-        elapsedTimeSec = stopTimeSec - startTimeSec;
     return elapsedTimeSec;
 }

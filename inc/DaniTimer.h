@@ -25,6 +25,7 @@ public:
     unsigned long getElapsedTimeSec();
 
 private:
+    int init();
     unsigned long getMeasureTime();
 #if defined _WIN32 || _WIN64
 	LARGE_INTEGER frequency;
@@ -36,8 +37,6 @@ private:
     struct timespec measureTime;
 #endif
 	unsigned long startTimeSec;
-	unsigned long stopTimeSec;
-	unsigned long currentTimeSec;
 	unsigned long elapsedTimeSec;
 };
 
