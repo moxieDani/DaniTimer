@@ -9,13 +9,16 @@ DaniTimer::~DaniTimer()
 {
 }
 
+/* Private Functions */
 int DaniTimer::init()
 {
 #if defined _WIN32 || _WIN64
     QueryPerformanceFrequency(&frequency);
 #endif
+    callBackFunc = nullptr;
     startTimeSec = 0;
     elapsedTimeSec = 0;
+    
     return 0;
 }
 
@@ -38,6 +41,19 @@ unsigned long DaniTimer::getMeasureTime()
     if( 0 == clock_gettime(CLOCK_MONOTONIC, &measureTime) )
         ret = ( ( measureTime.tv_sec * 1e9 ) + measureTime.tv_nsec ) / 1e3;
 #endif
+    
+    return ret;
+}
+
+/* Public Functions */
+int DaniTimer::registerCallack(DaniTimerCallbackFunc callback)
+{
+    int ret = 1;
+    if ( callback )
+    {
+        ret = ( callBackFunc = std::move(callback) )? 0 : 1;
+    }
+    
     return ret;
 }
 
@@ -49,6 +65,12 @@ int DaniTimer::start()
         startTimeSec = getMeasureTime();
         ret = 0;
     }
+    
+    if ( callBackFunc )
+    {
+        //Do the callback function. -> Maybe it will execute in a thread later.
+    }
+    
     return ret;
 }
 
@@ -61,6 +83,7 @@ int DaniTimer::stop()
         startTimeSec = 0;
         ret = 0;
     }
+    
 	return ret;
 }
 
@@ -79,6 +102,7 @@ unsigned long DaniTimer::getCurrentTimeMicroSec()
     unsigned long ret = 0;
     if ( startTimeSec > 0 && elapsedTimeSec == 0)
         ret = getMeasureTime() - startTimeSec;
+    
     return ret;
 }
 

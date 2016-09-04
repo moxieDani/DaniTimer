@@ -10,11 +10,16 @@
 #include<sys/time.h>
 #endif
 
+#include <functional>
+
+typedef std::function<int(int)> DaniTimerCallbackFunc;
+
 class DaniTimer
 {
 public:
 	DaniTimer();
 	~DaniTimer();
+    int registerCallack(DaniTimerCallbackFunc callback);
 	int start();
 	int stop();
 	unsigned long getCurrentTimeMicroSec();
@@ -27,6 +32,7 @@ public:
 private:
     int init();
     unsigned long getMeasureTime();
+    
 #if defined _WIN32 || _WIN64
 	LARGE_INTEGER frequency;
 	LARGE_INTEGER measureTime;
@@ -36,6 +42,8 @@ private:
 #else
     struct timespec measureTime;
 #endif
+    
+    DaniTimerCallbackFunc callBackFunc;
 	unsigned long startTimeSec;
 	unsigned long elapsedTimeSec;
 };
