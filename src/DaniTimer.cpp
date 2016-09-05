@@ -29,7 +29,9 @@ unsigned long DaniTimer::getMeasureTime()
 #if defined _WIN32 || _WIN64 //windows
     measureTime.QuadPart = 0;
     if ( QueryPerformanceCounter(&measureTime) )
-        ret = measureTime.QuadPart / frequency.QuadPart) * 1e6;
+		ret = (unsigned long)(double(measureTime.QuadPart) / (double(frequency.QuadPart)) * 1e6);
+
+        //ret = (unsigned long)((measureTime.QuadPart / frequency.QuadPart) * 1e6);
 #elif defined __MACH__ //MacOS
     if ( KERN_SUCCESS == host_get_clock_service(mach_host_self(), REALTIME_CLOCK, &measureClock) )
     {
@@ -89,12 +91,12 @@ int DaniTimer::stop()
 
 unsigned long DaniTimer::getCurrentTimeSec()
 {
-	return getCurrentTimeMilliSec() / 1e3;
+	return (unsigned long)(getCurrentTimeMilliSec() / 1e3);
 }
 
 unsigned long DaniTimer::getCurrentTimeMilliSec()
 {
-    return getCurrentTimeMicroSec() / 1e3;
+    return (unsigned long)(getCurrentTimeMicroSec() / 1e3);
 }
 
 unsigned long DaniTimer::getCurrentTimeMicroSec()
@@ -103,17 +105,17 @@ unsigned long DaniTimer::getCurrentTimeMicroSec()
     if ( startTimeSec > 0 && elapsedTimeSec == 0)
         ret = getMeasureTime() - startTimeSec;
     
-    return ret;
+    return (unsigned long)ret;
 }
 
 unsigned long DaniTimer::getElapsedTimeSec()
 {
-	return getElapsedTimeMilliSec() / 1e3;
+	return (unsigned long)(getElapsedTimeMilliSec() / 1e3);
 }
 
 unsigned long DaniTimer::getElapsedTimeMilliSec()
 {
-    return getElapsedTimeMicroSec() / 1e3;
+    return (unsigned long)(getElapsedTimeMicroSec() / 1e3);
 }
 
 unsigned long DaniTimer::getElapsedTimeMicroSec()
