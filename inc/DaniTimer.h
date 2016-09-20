@@ -11,15 +11,27 @@
 #endif
 
 #include <functional>
+#include <pthread.h>
 
-typedef std::function<int(int)> DaniTimerCallbackFunc;
+typedef std::function<int(unsigned int)> DaniTimerCallbackFunc;
+
+namespace callFrequency
+{
+    enum Enum
+    {
+        callTypeFirst = 0,
+        CALL_FUNCTION_EVERYTIME = 0,
+        CALL_FUNCTION_ONCE,
+        callTypeLast = CALL_FUNCTION_ONCE
+    };
+}
 
 class DaniTimer
 {
 public:
 	DaniTimer();
 	~DaniTimer();
-    int registerCallack(DaniTimerCallbackFunc callback);
+    int registerCallback(DaniTimerCallbackFunc callback, callFrequency::Enum callType, unsigned long intervalMilliSec);
 	int start();
 	int stop();
 	unsigned long getCurrentTimeMicroSec();
@@ -42,10 +54,15 @@ private:
 #else
     struct timespec measureTime;
 #endif
+    static unsigned long startTimeSec;
+    static unsigned long elapsedTimeSec;
+    static DaniTimerCallbackFunc callBackFunc;
+    static int callType;
+    static unsigned long intervalMilliSec;
     
-    DaniTimerCallbackFunc callBackFunc;
-	unsigned long startTimeSec;
-	unsigned long elapsedTimeSec;
+protected:
+    pthread_t callBackThread;
+    static void* callbackThreadFunc(void*);
 };
 
 #endif

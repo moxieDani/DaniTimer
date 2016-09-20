@@ -15,9 +15,10 @@ int DaniTimer::init()
 #if defined _WIN32 || _WIN64
     QueryPerformanceFrequency(&frequency);
 #endif
-    callBackFunc = nullptr;
     startTimeSec = 0;
     elapsedTimeSec = 0;
+    callBackFunc = nullptr;
+    pthread_create(&callBackThread, NULL, callbackThreadFunc, NULL);
     
     return 0;
 }
@@ -48,15 +49,39 @@ unsigned long DaniTimer::getMeasureTime()
 }
 
 /* Public Functions */
-int DaniTimer::registerCallack(DaniTimerCallbackFunc callback)
+int DaniTimer::registerCallback(DaniTimerCallbackFunc callback, callFrequency::Enum callType, unsigned long intervalMilliSec)
 {
     int ret = 1;
+    
     if ( callback )
+        ret = ( callBackFunc = std::move(callback) ) ? 0 : 1;
+    
+    if ( ret == 0)
     {
-        ret = ( callBackFunc = std::move(callback) )? 0 : 1;
+        DaniTimer::callType = callType;
+        DaniTimer::intervalMilliSec = intervalMilliSec;
     }
     
     return ret;
+}
+
+void* DaniTimer::callbackThreadFunc(void *data)
+{
+    while ( getElapsedTimeMilliSec() == 0)
+    {
+        switch (callType) {
+            case callFrequency::Enum::CALL_FUNCTION_EVERYTIME :
+                if ( (getCurrentTimeMicroSec() % intervalMilliSec) == 0 )
+                    callBackFunc(10);
+                break;
+            case callFrequency::Enum::CALL_FUNCTION_ONCE :
+                if ( getCurrentTimeMicroSec() == intervalMilliSec )
+                    callBackFunc(10);
+            default:
+                break;
+        }
+    }
+    return nullptr;
 }
 
 int DaniTimer::start()
@@ -71,6 +96,8 @@ int DaniTimer::start()
     if ( callBackFunc )
     {
         //Do the callback function. -> Maybe it will execute in a thread later.
+        int status;
+        pthread_join(callBackThread, (void **)&status);
     }
     
     return ret;
