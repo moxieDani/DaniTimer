@@ -7,6 +7,8 @@ DaniTimer::DaniTimer()
 
 DaniTimer::~DaniTimer()
 {
+    if ( callBackFunc )
+        pthread_join(callBackThread, nullptr);
 }
 
 /* Private Functions */
@@ -17,8 +19,9 @@ int DaniTimer::init()
 #endif
     startTimeSec = 0;
     elapsedTimeSec = 0;
+    callType = callFrequency::Enum::callTypeFirst;
+    intervalMilliSec = 0;
     callBackFunc = nullptr;
-    pthread_create(&callBackThread, NULL, callbackThreadFunc, NULL);
     
     return 0;
 }
@@ -31,8 +34,6 @@ unsigned long DaniTimer::getMeasureTime()
     measureTime.QuadPart = 0;
     if ( QueryPerformanceCounter(&measureTime) )
 		ret = (unsigned long)(double(measureTime.QuadPart) / (double(frequency.QuadPart)) * 1e6);
-
-        //ret = (unsigned long)((measureTime.QuadPart / frequency.QuadPart) * 1e6);
 #elif defined __MACH__ //MacOS
     if ( KERN_SUCCESS == host_get_clock_service(mach_host_self(), REALTIME_CLOCK, &measureClock) )
     {
@@ -56,10 +57,11 @@ int DaniTimer::registerCallback(DaniTimerCallbackFunc callback, callFrequency::E
     if ( callback )
         ret = ( callBackFunc = std::move(callback) ) ? 0 : 1;
     
-    if ( ret == 0)
+    if ( ret == 0 )
     {
         DaniTimer::callType = callType;
         DaniTimer::intervalMilliSec = intervalMilliSec;
+        pthread_create(&callBackThread, NULL, callbackThreadFunc, this);
     }
     
     return ret;
@@ -67,19 +69,31 @@ int DaniTimer::registerCallback(DaniTimerCallbackFunc callback, callFrequency::E
 
 void* DaniTimer::callbackThreadFunc(void *data)
 {
-    while ( getElapsedTimeMilliSec() == 0)
+    DaniTimer* t = (DaniTimer*)data;
+    unsigned long currentTime = 0;
+    unsigned long newCurrentTime = 0;
+    
+    while ( t->getElapsedTimeMilliSec() == 0)
     {
-        switch (callType) {
+        newCurrentTime = t->getCurrentTimeMilliSec();
+        
+        if ( currentTime/1e3 == newCurrentTime/1e3 )
+            continue;
+        
+        switch (t->callType)
+        {
             case callFrequency::Enum::CALL_FUNCTION_EVERYTIME :
-                if ( (getCurrentTimeMicroSec() % intervalMilliSec) == 0 )
-                    callBackFunc(10);
+                if ( ( newCurrentTime % t->intervalMilliSec ) == 0 )
+                    t->callBackFunc(newCurrentTime);
                 break;
             case callFrequency::Enum::CALL_FUNCTION_ONCE :
-                if ( getCurrentTimeMicroSec() == intervalMilliSec )
-                    callBackFunc(10);
+                if ( newCurrentTime == t->intervalMilliSec )
+                    t->callBackFunc(newCurrentTime);
             default:
                 break;
         }
+        
+        currentTime = newCurrentTime;
     }
     return nullptr;
 }
@@ -87,17 +101,11 @@ void* DaniTimer::callbackThreadFunc(void *data)
 int DaniTimer::start()
 {
     int ret = 1;
-    if (startTimeSec == 0)
+    
+    if ( startTimeSec == 0 )
     {
         startTimeSec = getMeasureTime();
         ret = 0;
-    }
-    
-    if ( callBackFunc )
-    {
-        //Do the callback function. -> Maybe it will execute in a thread later.
-        int status;
-        pthread_join(callBackThread, (void **)&status);
     }
     
     return ret;
@@ -106,7 +114,8 @@ int DaniTimer::start()
 int DaniTimer::stop()
 {
     int ret = 1;
-    if ( startTimeSec > 0 && elapsedTimeSec == 0)
+    
+    if ( startTimeSec > 0 && elapsedTimeSec == 0 )
     {
         elapsedTimeSec = getMeasureTime() - startTimeSec;
         startTimeSec = 0;
@@ -129,7 +138,8 @@ unsigned long DaniTimer::getCurrentTimeMilliSec()
 unsigned long DaniTimer::getCurrentTimeMicroSec()
 {
     unsigned long ret = 0;
-    if ( startTimeSec > 0 && elapsedTimeSec == 0)
+    
+    if ( startTimeSec > 0 && elapsedTimeSec == 0 )
         ret = getMeasureTime() - startTimeSec;
     
     return (unsigned long)ret;

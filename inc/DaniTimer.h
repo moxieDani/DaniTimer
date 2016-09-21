@@ -13,7 +13,7 @@
 #include <functional>
 #include <pthread.h>
 
-typedef std::function<int(unsigned int)> DaniTimerCallbackFunc;
+typedef std::function<int(unsigned long)> DaniTimerCallbackFunc;
 
 namespace callFrequency
 {
@@ -54,11 +54,11 @@ private:
 #else
     struct timespec measureTime;
 #endif
-    static unsigned long startTimeSec;
-    static unsigned long elapsedTimeSec;
-    static DaniTimerCallbackFunc callBackFunc;
-    static int callType;
-    static unsigned long intervalMilliSec;
+    unsigned long startTimeSec;
+    unsigned long elapsedTimeSec;
+    DaniTimerCallbackFunc callBackFunc;
+    int callType;
+    unsigned long intervalMilliSec;
     
 protected:
     pthread_t callBackThread;
