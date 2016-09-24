@@ -20,7 +20,7 @@ int DaniTimer::init()
     startTimeSec = 0;
     elapsedTimeSec = 0;
     callType = callFrequency::Enum::callTypeFirst;
-    intervalMilliSec = 0;
+    userSetTimeMilliSec = 0;
     callBackFunc = nullptr;
     
     return 0;
@@ -50,7 +50,7 @@ unsigned long DaniTimer::getMeasureTime()
 }
 
 /* Public Functions */
-int DaniTimer::registerCallback(DaniTimerCallbackFunc callback, callFrequency::Enum callType, unsigned long intervalMilliSec)
+int DaniTimer::registerCallback(DaniTimerCallbackFunc callback, callFrequency::Enum callType, unsigned long userSetTimeMilliSec)
 {
     int ret = 1;
     
@@ -60,8 +60,7 @@ int DaniTimer::registerCallback(DaniTimerCallbackFunc callback, callFrequency::E
     if ( ret == 0 )
     {
         DaniTimer::callType = callType;
-        DaniTimer::intervalMilliSec = intervalMilliSec;
-        pthread_create(&callBackThread, NULL, callbackThreadFunc, this);
+        DaniTimer::userSetTimeMilliSec = userSetTimeMilliSec;
     }
     
     return ret;
@@ -73,26 +72,29 @@ void* DaniTimer::callbackThreadFunc(void *data)
     unsigned long currentTime = 0;
     unsigned long newCurrentTime = 0;
     
-    while ( t->getElapsedTimeMilliSec() == 0)
+    while ( t->getElapsedTimeMilliSec() == 0 ||
+           currentTime <= t->targetStopTimeMilliSec )
     {
         newCurrentTime = t->getCurrentTimeMilliSec();
         
         if ( currentTime/1e3 == newCurrentTime/1e3 )
             continue;
         
-        switch (t->callType)
+        if ( t->callBackFunc )
         {
-            case callFrequency::Enum::CALL_FUNCTION_EVERYTIME :
-                if ( ( newCurrentTime % t->intervalMilliSec ) == 0 )
-                    t->callBackFunc(newCurrentTime);
-                break;
-            case callFrequency::Enum::CALL_FUNCTION_ONCE :
-                if ( newCurrentTime == t->intervalMilliSec )
-                    t->callBackFunc(newCurrentTime);
-            default:
-                break;
+            switch (t->callType)
+            {
+                case callFrequency::Enum::CALL_FUNCTION_EVERYTIME :
+                    if ( ( newCurrentTime % t->userSetTimeMilliSec ) == 0 )
+                        t->callBackFunc(newCurrentTime);
+                    break;
+                case callFrequency::Enum::CALL_FUNCTION_ONCE :
+                    if ( newCurrentTime == t->userSetTimeMilliSec )
+                        t->callBackFunc(newCurrentTime);
+                default:
+                    break;
+            }
         }
-        
         currentTime = newCurrentTime;
     }
     return nullptr;
@@ -104,7 +106,9 @@ int DaniTimer::start()
     
     if ( startTimeSec == 0 )
     {
+        pthread_create(&callBackThread, NULL, callbackThreadFunc, this);
         startTimeSec = getMeasureTime();
+        elapsedTimeSec = 0;
         ret = 0;
     }
     
@@ -123,6 +127,19 @@ int DaniTimer::stop()
     }
     
 	return ret;
+}
+
+int DaniTimer::setStopTimeMilliSec(unsigned long targetStopTimeMilliSec)
+{
+    int ret = 1;
+    
+    if ( elapsedTimeSec == 0 )
+    {
+        DaniTimer::targetStopTimeMilliSec = targetStopTimeMilliSec;
+        ret = 0;
+    }
+    
+    return ret;
 }
 
 unsigned long DaniTimer::getCurrentTimeSec()

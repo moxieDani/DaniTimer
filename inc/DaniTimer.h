@@ -31,9 +31,10 @@ class DaniTimer
 public:
 	DaniTimer();
 	~DaniTimer();
-    int registerCallback(DaniTimerCallbackFunc callback, callFrequency::Enum callType, unsigned long intervalMilliSec);
+    int registerCallback(DaniTimerCallbackFunc callback, callFrequency::Enum callType, unsigned long userSetTimeMilliSec);
 	int start();
 	int stop();
+    int setStopTimeMilliSec(unsigned long targetStopTimeMilliSec);
 	unsigned long getCurrentTimeMicroSec();
     unsigned long getCurrentTimeMilliSec();
     unsigned long getCurrentTimeSec();
@@ -55,10 +56,11 @@ private:
     struct timespec measureTime;
 #endif
     unsigned long startTimeSec;
+    unsigned long targetStopTimeMilliSec;
     unsigned long elapsedTimeSec;
     DaniTimerCallbackFunc callBackFunc;
     int callType;
-    unsigned long intervalMilliSec;
+    unsigned long userSetTimeMilliSec;
     
 protected:
     pthread_t callBackThread;
