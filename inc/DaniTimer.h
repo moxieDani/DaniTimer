@@ -11,7 +11,7 @@
 #endif
 
 #include <functional>
-#include <pthread.h>
+#include <thread>
 
 typedef std::function<int(unsigned long)> DaniTimerCallbackFunc;
 
@@ -63,8 +63,8 @@ private:
     unsigned long userSetTimeMilliSec;
     
 protected:
-    pthread_t callBackThread;
-    static void* callbackThreadFunc(void*);
+    std::thread *callBackThread;
+    static void callbackThreadFunc(void*);
 };
 
 #endif

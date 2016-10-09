@@ -8,7 +8,14 @@ DaniTimer::DaniTimer()
 DaniTimer::~DaniTimer()
 {
     if ( callBackFunc )
-        pthread_join(callBackThread, nullptr);
+        callBackFunc = nullptr;
+    
+    if ( callBackThread )
+    {
+        callBackThread->join();
+        delete callBackThread;
+    }
+        
 }
 
 /* Private Functions */
@@ -66,7 +73,7 @@ int DaniTimer::registerCallback(DaniTimerCallbackFunc callback, callFrequency::E
     return ret;
 }
 
-void* DaniTimer::callbackThreadFunc(void *data)
+void DaniTimer::callbackThreadFunc(void *data)
 {
     DaniTimer* t = (DaniTimer*)data;
     unsigned long currentTime = 0;
@@ -97,7 +104,6 @@ void* DaniTimer::callbackThreadFunc(void *data)
         }
         currentTime = newCurrentTime;
     }
-    return nullptr;
 }
 
 int DaniTimer::start()
@@ -106,7 +112,7 @@ int DaniTimer::start()
     
     if ( startTimeSec == 0 )
     {
-        pthread_create(&callBackThread, NULL, callbackThreadFunc, this);
+        callBackThread = new std::thread (&DaniTimer::callbackThreadFunc, this);
         startTimeSec = getMeasureTime();
         elapsedTimeSec = 0;
         ret = 0;
