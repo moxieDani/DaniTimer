@@ -1,7 +1,21 @@
 #include "DaniTimer.h"
 
+#if defined _WIN32 || _WIN64
+    #define TALBODY_CLASS TALBodyWindows
+#elif defined __APPLE__
+    #define TALBODY_CLASS TALBodyMacOSX
+#else
+    #define TALBODY_CLASS TALBodyLinux
+#endif
+
+#define STRINGIZE(x) #x                      // TALBodyXXXX -> "TALBodyXXXX"
+#define GET_TALBODY_HEADER(x) STRINGIZE(x.h) // "TALBodyXXXX"   -> "TALBodyXXXX.h"
+
+#include GET_TALBODY_HEADER(TALBODY_CLASS)   // #include "TALBodyXXXX.h"
+
 DaniTimer::DaniTimer()
 {
+    tal = new TALBODY_CLASS;
     init();
 }
 
@@ -15,45 +29,24 @@ DaniTimer::~DaniTimer()
         callBackThread->join();
         delete callBackThread;
     }
-        
+    if ( tal )
+        delete tal;
 }
 
 /* Private Functions */
 int DaniTimer::init()
 {
-#if defined _WIN32 || _WIN64
-    QueryPerformanceFrequency(&frequency);
-#endif
     startTimeSec = 0;
     elapsedTimeSec = 0;
-    callType = callFrequency::Enum::callTypeFirst;
+    callType = callFrequency::Enum::NONE;
     userSetTimeMilliSec = 0;
     callBackFunc = nullptr;
-    
-    return 0;
+    return tal->init();
 }
 
 unsigned long DaniTimer::getMeasureTime()
 {
-    unsigned long ret = 0;
-    
-#if defined _WIN32 || _WIN64 //windows
-    measureTime.QuadPart = 0;
-    if ( QueryPerformanceCounter(&measureTime) )
-		ret = (unsigned long)(double(measureTime.QuadPart) / (double(frequency.QuadPart)) * 1e6);
-#elif defined __MACH__ //MacOS
-    if ( KERN_SUCCESS == host_get_clock_service(mach_host_self(), REALTIME_CLOCK, &measureClock) )
-    {
-        if ( KERN_SUCCESS == clock_get_time(measureClock, &measureTime) )
-            ret = ( ( measureTime.tv_sec * 1e9 ) + measureTime.tv_nsec ) / 1e3;
-        mach_port_deallocate(mach_task_self(), measureClock);
-    }
-#else //Linux
-    if( 0 == clock_gettime(CLOCK_MONOTONIC, &measureTime) )
-        ret = ( ( measureTime.tv_sec * 1e9 ) + measureTime.tv_nsec ) / 1e3;
-#endif
-    
-    return ret;
+    return tal->getMeasureTime();
 }
 
 /* Public Functions */
@@ -91,11 +84,11 @@ void DaniTimer::callbackThreadFunc(void *data)
         {
             switch (t->callType)
             {
-                case callFrequency::Enum::CALL_FUNCTION_EVERYTIME :
+                case callFrequency::Enum::CALL_EVERYTIME :
                     if ( ( newCurrentTime % t->userSetTimeMilliSec ) == 0 )
                         t->callBackFunc(newCurrentTime);
                     break;
-                case callFrequency::Enum::CALL_FUNCTION_ONCE :
+                case callFrequency::Enum::CALL_ONCE :
                     if ( newCurrentTime == t->userSetTimeMilliSec )
                         t->callBackFunc(newCurrentTime);
                 default:
