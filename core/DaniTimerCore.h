@@ -5,7 +5,7 @@
 #include <thread>
 #include "TAL.h"
 
-typedef std::function<int(unsigned long)> DaniTimerCallbackFunc;
+typedef std::function<int(unsigned long)> DaniTimerCoreCallbackFunc;
 
 namespace callFrequency
 {
@@ -18,12 +18,12 @@ namespace callFrequency
     };
 }
 
-class DaniTimer
+class DaniTimerCore
 {
 public:
-	DaniTimer();
-	~DaniTimer();
-    int registerCallback(DaniTimerCallbackFunc callback, callFrequency::Enum callType, unsigned long userSetTimeMilliSec);
+	DaniTimerCore();
+	~DaniTimerCore();
+    int registerCallback(DaniTimerCoreCallbackFunc callback, callFrequency::Enum callType, unsigned long userSetTimeMilliSec);
 	int start();
 	int stop();
     int setStopTimeMilliSec(unsigned long targetStopTimeMilliSec);
@@ -42,7 +42,7 @@ private:
     unsigned long startTimeSec;
     unsigned long targetStopTimeMilliSec;
     unsigned long elapsedTimeSec;
-    DaniTimerCallbackFunc callBackFunc;
+    DaniTimerCoreCallbackFunc callBackFunc;
     int callType;
     unsigned long userSetTimeMilliSec;
     std::thread *callBackThread;

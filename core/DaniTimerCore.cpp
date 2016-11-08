@@ -1,4 +1,4 @@
-#include "DaniTimer.h"
+#include "DaniTimerCore.h"
 
 #if defined _WIN32 || _WIN64
     #define TALBODY_CLASS TALBodyWindows
@@ -13,13 +13,13 @@
 
 #include GET_TALBODY_HEADER(TALBODY_CLASS)   // #include "TALBodyXXXX.h"
 
-DaniTimer::DaniTimer()
+DaniTimerCore::DaniTimerCore()
 {
     tal = new TALBODY_CLASS;
     init();
 }
 
-DaniTimer::~DaniTimer()
+DaniTimerCore::~DaniTimerCore()
 {
     if ( callBackFunc )
         callBackFunc = nullptr;
@@ -34,7 +34,7 @@ DaniTimer::~DaniTimer()
 }
 
 /* Private Functions */
-int DaniTimer::init()
+int DaniTimerCore::init()
 {
     startTimeSec = 0;
     elapsedTimeSec = 0;
@@ -44,13 +44,13 @@ int DaniTimer::init()
     return tal->init();
 }
 
-unsigned long DaniTimer::getMeasureTime()
+unsigned long DaniTimerCore::getMeasureTime()
 {
     return tal->getMeasureTime();
 }
 
 /* Public Functions */
-int DaniTimer::registerCallback(DaniTimerCallbackFunc callback, callFrequency::Enum callType, unsigned long userSetTimeMilliSec)
+int DaniTimerCore::registerCallback(DaniTimerCoreCallbackFunc callback, callFrequency::Enum callType, unsigned long userSetTimeMilliSec)
 {
     int ret = 1;
     
@@ -59,16 +59,16 @@ int DaniTimer::registerCallback(DaniTimerCallbackFunc callback, callFrequency::E
     
     if ( ret == 0 )
     {
-        DaniTimer::callType = callType;
-        DaniTimer::userSetTimeMilliSec = userSetTimeMilliSec;
+        DaniTimerCore::callType = callType;
+        DaniTimerCore::userSetTimeMilliSec = userSetTimeMilliSec;
     }
     
     return ret;
 }
 
-void DaniTimer::callbackThreadFunc(void *data)
+void DaniTimerCore::callbackThreadFunc(void *data)
 {
-    DaniTimer* t = (DaniTimer*)data;
+    DaniTimerCore* t = (DaniTimerCore*)data;
     unsigned long currentTime = 0;
     unsigned long newCurrentTime = 0;
     
@@ -99,13 +99,13 @@ void DaniTimer::callbackThreadFunc(void *data)
     }
 }
 
-int DaniTimer::start()
+int DaniTimerCore::start()
 {
     int ret = 1;
     
     if ( startTimeSec == 0 )
     {
-        callBackThread = new std::thread (&DaniTimer::callbackThreadFunc, this);
+        callBackThread = new std::thread (&DaniTimerCore::callbackThreadFunc, this);
         startTimeSec = getMeasureTime();
         elapsedTimeSec = 0;
         ret = 0;
@@ -114,7 +114,7 @@ int DaniTimer::start()
     return ret;
 }
 
-int DaniTimer::stop()
+int DaniTimerCore::stop()
 {
     int ret = 1;
     
@@ -128,30 +128,30 @@ int DaniTimer::stop()
 	return ret;
 }
 
-int DaniTimer::setStopTimeMilliSec(unsigned long targetStopTimeMilliSec)
+int DaniTimerCore::setStopTimeMilliSec(unsigned long targetStopTimeMilliSec)
 {
     int ret = 1;
     
     if ( elapsedTimeSec == 0 )
     {
-        DaniTimer::targetStopTimeMilliSec = targetStopTimeMilliSec;
+        DaniTimerCore::targetStopTimeMilliSec = targetStopTimeMilliSec;
         ret = 0;
     }
     
     return ret;
 }
 
-unsigned long DaniTimer::getCurrentTimeSec()
+unsigned long DaniTimerCore::getCurrentTimeSec()
 {
 	return (unsigned long)(getCurrentTimeMilliSec() / 1e3);
 }
 
-unsigned long DaniTimer::getCurrentTimeMilliSec()
+unsigned long DaniTimerCore::getCurrentTimeMilliSec()
 {
     return (unsigned long)(getCurrentTimeMicroSec() / 1e3);
 }
 
-unsigned long DaniTimer::getCurrentTimeMicroSec()
+unsigned long DaniTimerCore::getCurrentTimeMicroSec()
 {
     unsigned long ret = 0;
     
@@ -161,17 +161,17 @@ unsigned long DaniTimer::getCurrentTimeMicroSec()
     return (unsigned long)ret;
 }
 
-unsigned long DaniTimer::getElapsedTimeSec()
+unsigned long DaniTimerCore::getElapsedTimeSec()
 {
 	return (unsigned long)(getElapsedTimeMilliSec() / 1e3);
 }
 
-unsigned long DaniTimer::getElapsedTimeMilliSec()
+unsigned long DaniTimerCore::getElapsedTimeMilliSec()
 {
     return (unsigned long)(getElapsedTimeMicroSec() / 1e3);
 }
 
-unsigned long DaniTimer::getElapsedTimeMicroSec()
+unsigned long DaniTimerCore::getElapsedTimeMicroSec()
 {
     return elapsedTimeSec;
 }
