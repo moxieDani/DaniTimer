@@ -42,7 +42,7 @@
     <ClCompile Include="..\tal\talbody\TALBodyWindows.cpp">
       <Filter>소스 파일\core\TAL\TALBody</Filter>
     </ClCompile>
-    <ClCompile Include="..\DaniTimer.cpp">
+    <ClCompile Include="..\DaniTimerCore.cpp">
       <Filter>소스 파일\core</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,7 +59,7 @@
     <ClInclude Include="..\tal\talbody\TALBodyWindows.h">
       <Filter>소스 파일\core\TAL\TALBody</Filter>
     </ClInclude>
-    <ClInclude Include="..\DaniTimer.h">
+    <ClInclude Include="..\DaniTimerCore.h">
       <Filter>소스 파일\core</Filter>
     </ClInclude>
   </ItemGroup>

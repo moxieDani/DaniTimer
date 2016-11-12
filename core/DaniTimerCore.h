@@ -1,5 +1,5 @@
-#ifndef DANI_TIMER_H_DEF
-#define DANI_TIMER_H_DEF
+#ifndef DANI_TIMER_CORE_H_DEF
+#define DANI_TIMER_CORE_H_DEF
 
 #include <functional>
 #include <thread>
@@ -49,4 +49,4 @@ private:
     static void callbackThreadFunc(void*);
 };
 
-#endif /* DANI_TIMER_H_DEF */
+#endif /* DANI_TIMER_CORE_H_DEF */

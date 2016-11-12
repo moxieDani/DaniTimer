@@ -146,7 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\DaniTimer.cpp" />
+    <ClCompile Include="..\DaniTimerCore.cpp" />
     <ClCompile Include="..\tal\TAL.cpp" />
     <ClCompile Include="..\tal\talbody\TALBodyLinux.cpp" />
     <ClCompile Include="..\tal\talbody\TALBodyMacOSX.cpp" />
@@ -154,7 +154,7 @@
     <ClCompile Include="testVS2015.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\DaniTimer.h" />
+    <ClInclude Include="..\DaniTimerCore.h" />
     <ClInclude Include="..\tal\TAL.h" />
     <ClInclude Include="..\tal\talbody\TALBodyLinux.h" />
     <ClInclude Include="..\tal\talbody\TALBodyMacOSX.h" />

@@ -7,27 +7,15 @@
 //
 
 #include <iostream>
-#include "DaniTimerCore.h"
+#include "DaniTimer.h"
 #include <windows.h>
 
 using namespace std;
-int callBackTest( unsigned long a );
-
-int callBackTest( unsigned long a )
-{
-    printf("[CallbackTest] Current time(%lu)\n", a);
-    return 0;
-}
 
 int main(int argc, const char * argv[]) {
     cout << "Dani Timer test\n";
     
-    DaniTimerCore timer;
-    if ( 0 == timer.registerCallback(callBackTest, callFrequency::Enum::CALL_EVERYTIME, 1000))
-        cout << "Callback registration success!" << endl;
-    else
-        cout << "Callback registration failed!" << endl;
-    
+    DaniTimer timer;
     if ( 1 == timer.stop())
         cout << "Invalid sequence! -> call start first!" << endl;
    
@@ -91,6 +79,6 @@ int main(int argc, const char * argv[]) {
     Sleep(1000);
     if ( 0 == timer.getCurrentTimeMicroSec() )
         cout << "Invalid sequence! -> Timer is already stopped!" << endl;
-    
+	Sleep(1000);
     return 0;
 }
