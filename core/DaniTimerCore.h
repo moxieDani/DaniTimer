@@ -18,6 +18,16 @@ namespace callFrequency
     };
 }
 
+namespace timerStatus
+{
+    enum Enum
+    {
+        PROGRESS = 0x10000000,
+        PAUSE    = 0x10000002,
+        STOP     = 0x10000003
+    };
+}
+
 class DaniTimerCore
 {
 public:
@@ -26,7 +36,8 @@ public:
     int registerCallback(DaniTimerCoreCallbackFunc callback, callFrequency::Enum callType, unsigned long userSetTimeMilliSec);
 	int start();
 	int stop();
-    int setStopTimeMilliSec(unsigned long targetStopTimeMilliSec);
+    int setStopTimeMilliSec(unsigned long targetTimeMilliSec);
+    int setCountDownTimeMilliSec(unsigned long targetTimeMilliSec);
 	unsigned long getCurrentTimeMicroSec();
     unsigned long getCurrentTimeMilliSec();
     unsigned long getCurrentTimeSec();
@@ -47,6 +58,7 @@ private:
     unsigned long userSetTimeMilliSec;
     std::thread *callBackThread;
     static void callbackThreadFunc(void*);
+    timerStatus::Enum timerStatus;
 };
 
 #endif /* DANI_TIMER_CORE_H_DEF */

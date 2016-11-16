@@ -41,6 +41,7 @@ int DaniTimerCore::init()
     callType = callFrequency::Enum::NONE;
     userSetTimeMilliSec = 0;
     callBackFunc = nullptr;
+    timerStatus = timerStatus::Enum::STOP;
     return tal->init();
 }
 
@@ -72,8 +73,7 @@ void DaniTimerCore::callbackThreadFunc(void *data)
     unsigned long currentTime = 0;
     unsigned long newCurrentTime = 0;
     
-    while ( t->getElapsedTimeMilliSec() == 0 ||
-           currentTime <= t->targetStopTimeMilliSec )
+    while ( t->timerStatus == timerStatus::Enum::PROGRESS )
     {
         newCurrentTime = t->getCurrentTimeMilliSec();
         
@@ -91,6 +91,7 @@ void DaniTimerCore::callbackThreadFunc(void *data)
                 case callFrequency::Enum::CALL_ONCE :
                     if ( newCurrentTime == t->userSetTimeMilliSec )
                         t->callBackFunc(newCurrentTime);
+                    break;
                 default:
                     break;
             }
@@ -105,8 +106,9 @@ int DaniTimerCore::start()
     
     if ( startTimeSec == 0 )
     {
-        callBackThread = new std::thread (&DaniTimerCore::callbackThreadFunc, this);
         startTimeSec = getMeasureTime();
+        timerStatus = timerStatus::Enum::PROGRESS;
+        callBackThread = new std::thread (&DaniTimerCore::callbackThreadFunc, this);
         elapsedTimeSec = 0;
         ret = 0;
     }
@@ -118,23 +120,37 @@ int DaniTimerCore::stop()
 {
     int ret = 1;
     
-    if ( startTimeSec > 0 && elapsedTimeSec == 0 )
+    if ( timerStatus == timerStatus::Enum::PROGRESS )
     {
         elapsedTimeSec = getMeasureTime() - startTimeSec;
         startTimeSec = 0;
+        timerStatus = timerStatus::Enum::STOP;
         ret = 0;
     }
     
 	return ret;
 }
 
-int DaniTimerCore::setStopTimeMilliSec(unsigned long targetStopTimeMilliSec)
+int DaniTimerCore::setStopTimeMilliSec(unsigned long targetTimeMilliSec)
 {
     int ret = 1;
     
-    if ( elapsedTimeSec == 0 )
+    if ( timerStatus != timerStatus::Enum::STOP )
     {
-        DaniTimerCore::targetStopTimeMilliSec = targetStopTimeMilliSec;
+        DaniTimerCore::targetStopTimeMilliSec = targetTimeMilliSec;
+        ret = 0;
+    }
+    
+    return ret;
+}
+
+int DaniTimerCore::setCountDownTimeMilliSec(unsigned long targetTimeMilliSec)
+{
+    int ret = 1;
+    
+    if ( timerStatus == timerStatus::Enum::STOP )
+    {
+        DaniTimerCore::targetStopTimeMilliSec = targetTimeMilliSec;
         ret = 0;
     }
     
