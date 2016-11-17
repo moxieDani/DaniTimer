@@ -42,23 +42,18 @@
     return ret;
 }
 
+- (int) reset {
+    int ret = timerCore->reset();
+    return ret;
+}
+
 - (int) setStopTimeMilliSec:(unsigned long) targetStopTimeMilliSec {
     int ret = timerCore->setStopTimeMilliSec(targetStopTimeMilliSec);
     return ret;
 }
 
-- (unsigned long) getCurrentTimeMicroSec {
-    unsigned long ret = timerCore->getCurrentTimeMicroSec();
-    return ret;
-}
-
-- (unsigned long) getCurrentTimeMilliSec {
-    unsigned long ret = timerCore->getCurrentTimeMilliSec();
-    return ret;
-}
-
-- (unsigned long) getCurrentTimeSec {
-    unsigned long ret = timerCore->getCurrentTimeSec();
+- (int) setStartTimeMilliSec:(unsigned long) targetStopTimeMilliSec {
+    int ret = timerCore->setStartTimeMilliSec(targetStopTimeMilliSec);
     return ret;
 }
 

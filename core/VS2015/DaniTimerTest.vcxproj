@@ -155,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DaniTimerCore.h" />
+    <ClInclude Include="..\DaniTimerCoreTypes.h" />
     <ClInclude Include="..\tal\TAL.h" />
     <ClInclude Include="..\tal\talbody\TALBodyLinux.h" />
     <ClInclude Include="..\tal\talbody\TALBodyMacOSX.h" />

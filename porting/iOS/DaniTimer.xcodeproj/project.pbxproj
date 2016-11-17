@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE2593711DE1FCD400BAC26D /* DaniTimerCoreTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2593701DE1FCD400BAC26D /* DaniTimerCoreTypes.h */; };
 		F4F5D2661DD4A7D300EB7324 /* DaniTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F5D25C1DD4A7D300EB7324 /* DaniTimer.framework */; };
 		F4F5D26B1DD4A7D300EB7324 /* DaniTimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F5D26A1DD4A7D300EB7324 /* DaniTimerTests.m */; };
 		F4F5D26D1DD4A7D300EB7324 /* DaniTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F5D25F1DD4A7D300EB7324 /* DaniTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE2593701DE1FCD400BAC26D /* DaniTimerCoreTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DaniTimerCoreTypes.h; path = ../../../core/DaniTimerCoreTypes.h; sourceTree = "<group>"; };
 		F4F5D25C1DD4A7D300EB7324 /* DaniTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DaniTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F5D25F1DD4A7D300EB7324 /* DaniTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DaniTimer.h; sourceTree = "<group>"; };
 		F4F5D2601DD4A7D300EB7324 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				F4F5D2871DD4C0E600EB7324 /* DaniTimerCore.cpp */,
 				F4F5D2881DD4C0E600EB7324 /* DaniTimerCore.h */,
+				BE2593701DE1FCD400BAC26D /* DaniTimerCoreTypes.h */,
 				F4F5D2811DD4B99700EB7324 /* TAL */,
 			);
 			name = core;
@@ -142,6 +145,7 @@
 				F4F5D28A1DD4C0E600EB7324 /* DaniTimerCore.h in Headers */,
 				F4F5D28E1DD4C0F600EB7324 /* TAL.h in Headers */,
 				F4F5D26D1DD4A7D300EB7324 /* DaniTimer.h in Headers */,
+				BE2593711DE1FCD400BAC26D /* DaniTimerCoreTypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

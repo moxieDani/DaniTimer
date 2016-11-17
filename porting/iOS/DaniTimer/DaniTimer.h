@@ -11,10 +11,9 @@
 @interface DaniTimer: NSObject
 - (int) start;
 - (int) stop;
+- (int) reset;
 - (int) setStopTimeMilliSec:(unsigned long) targetStopTimeMilliSec;
-- (unsigned long) getCurrentTimeMicroSec;
-- (unsigned long) getCurrentTimeMilliSec;
-- (unsigned long) getCurrentTimeSec;
+- (int) setStartTimeMilliSec:(unsigned long) targetTimeMilliSec;
 - (unsigned long) getElapsedTimeMicroSec;
 - (unsigned long) getElapsedTimeMilliSec;
 - (unsigned long) getElapsedTimeSec;

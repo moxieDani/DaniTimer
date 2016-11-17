@@ -1,0 +1,307 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F426DF701DAE046C00C4AB6E /* TAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F426DF6E1DAE046C00C4AB6E /* TAL.cpp */; };
+		F426DF771DAE047400C4AB6E /* TALBodyLinux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F426DF711DAE047400C4AB6E /* TALBodyLinux.cpp */; };
+		F426DF791DAE047400C4AB6E /* TALBodyWindows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F426DF751DAE047400C4AB6E /* TALBodyWindows.cpp */; };
+		F426DF7C1DAFC81200C4AB6E /* TALBodyMacOSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F426DF7A1DAFC81200C4AB6E /* TALBodyMacOSX.cpp */; };
+		F4903FF61DD21E7000575295 /* DaniTimerCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4903FF41DD21E7000575295 /* DaniTimerCore.cpp */; };
+		F4A737511DAFD89400CFF620 /* testMacOSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4A737501DAFD89400CFF620 /* testMacOSX.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F44CF0861D7181B100EE9C87 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BE25936F1DE1FC6D00BAC26D /* DaniTimerCoreTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DaniTimerCoreTypes.h; path = ../DaniTimerCoreTypes.h; sourceTree = "<group>"; };
+		F426DF6E1DAE046C00C4AB6E /* TAL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TAL.cpp; path = ../tal/TAL.cpp; sourceTree = "<group>"; };
+		F426DF6F1DAE046C00C4AB6E /* TAL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAL.h; path = ../tal/TAL.h; sourceTree = "<group>"; };
+		F426DF711DAE047400C4AB6E /* TALBodyLinux.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TALBodyLinux.cpp; path = ../tal/talbody/TALBodyLinux.cpp; sourceTree = "<group>"; };
+		F426DF721DAE047400C4AB6E /* TALBodyLinux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALBodyLinux.h; path = ../tal/talbody/TALBodyLinux.h; sourceTree = "<group>"; };
+		F426DF751DAE047400C4AB6E /* TALBodyWindows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TALBodyWindows.cpp; path = ../tal/talbody/TALBodyWindows.cpp; sourceTree = "<group>"; };
+		F426DF761DAE047400C4AB6E /* TALBodyWindows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALBodyWindows.h; path = ../tal/talbody/TALBodyWindows.h; sourceTree = "<group>"; };
+		F426DF7A1DAFC81200C4AB6E /* TALBodyMacOSX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TALBodyMacOSX.cpp; path = ../tal/talbody/TALBodyMacOSX.cpp; sourceTree = "<group>"; };
+		F426DF7B1DAFC81200C4AB6E /* TALBodyMacOSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALBodyMacOSX.h; path = ../tal/talbody/TALBodyMacOSX.h; sourceTree = "<group>"; };
+		F44CF0881D7181B100EE9C87 /* DaniTimerTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DaniTimerTest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4903FF41DD21E7000575295 /* DaniTimerCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DaniTimerCore.cpp; path = ../DaniTimerCore.cpp; sourceTree = "<group>"; };
+		F4903FF51DD21E7000575295 /* DaniTimerCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DaniTimerCore.h; path = ../DaniTimerCore.h; sourceTree = "<group>"; };
+		F4A737501DAFD89400CFF620 /* testMacOSX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testMacOSX.cpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F44CF0851D7181B100EE9C87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F426DF5B1DABEF3900C4AB6E /* core */ = {
+			isa = PBXGroup;
+			children = (
+				F4903FF41DD21E7000575295 /* DaniTimerCore.cpp */,
+				F4903FF51DD21E7000575295 /* DaniTimerCore.h */,
+				BE25936F1DE1FC6D00BAC26D /* DaniTimerCoreTypes.h */,
+				F426DF5F1DABEF8100C4AB6E /* TAL */,
+			);
+			name = core;
+			sourceTree = "<group>";
+		};
+		F426DF5F1DABEF8100C4AB6E /* TAL */ = {
+			isa = PBXGroup;
+			children = (
+				F426DF6E1DAE046C00C4AB6E /* TAL.cpp */,
+				F426DF6F1DAE046C00C4AB6E /* TAL.h */,
+				F426DF691DABF14F00C4AB6E /* TALBody */,
+			);
+			name = TAL;
+			sourceTree = "<group>";
+		};
+		F426DF691DABF14F00C4AB6E /* TALBody */ = {
+			isa = PBXGroup;
+			children = (
+				F426DF711DAE047400C4AB6E /* TALBodyLinux.cpp */,
+				F426DF721DAE047400C4AB6E /* TALBodyLinux.h */,
+				F426DF7A1DAFC81200C4AB6E /* TALBodyMacOSX.cpp */,
+				F426DF7B1DAFC81200C4AB6E /* TALBodyMacOSX.h */,
+				F426DF751DAE047400C4AB6E /* TALBodyWindows.cpp */,
+				F426DF761DAE047400C4AB6E /* TALBodyWindows.h */,
+			);
+			name = TALBody;
+			sourceTree = "<group>";
+		};
+		F44CF07F1D7181B100EE9C87 = {
+			isa = PBXGroup;
+			children = (
+				F426DF5B1DABEF3900C4AB6E /* core */,
+				F44CF08A1D7181B100EE9C87 /* DaniTimerTest */,
+				F44CF0891D7181B100EE9C87 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F44CF0891D7181B100EE9C87 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F44CF0881D7181B100EE9C87 /* DaniTimerTest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F44CF08A1D7181B100EE9C87 /* DaniTimerTest */ = {
+			isa = PBXGroup;
+			children = (
+				F4A737501DAFD89400CFF620 /* testMacOSX.cpp */,
+			);
+			path = DaniTimerTest;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F44CF0871D7181B100EE9C87 /* DaniTimerTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F44CF08F1D7181B100EE9C87 /* Build configuration list for PBXNativeTarget "DaniTimerTest" */;
+			buildPhases = (
+				F44CF0841D7181B100EE9C87 /* Sources */,
+				F44CF0851D7181B100EE9C87 /* Frameworks */,
+				F44CF0861D7181B100EE9C87 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DaniTimerTest;
+			productName = DaniTimerTest;
+			productReference = F44CF0881D7181B100EE9C87 /* DaniTimerTest */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F44CF0801D7181B100EE9C87 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "daniel-kisoon-kwon";
+				TargetAttributes = {
+					F44CF0871D7181B100EE9C87 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = F44CF0831D7181B100EE9C87 /* Build configuration list for PBXProject "DaniTimerTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F44CF07F1D7181B100EE9C87;
+			productRefGroup = F44CF0891D7181B100EE9C87 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F44CF0871D7181B100EE9C87 /* DaniTimerTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F44CF0841D7181B100EE9C87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4903FF61DD21E7000575295 /* DaniTimerCore.cpp in Sources */,
+				F4A737511DAFD89400CFF620 /* testMacOSX.cpp in Sources */,
+				F426DF771DAE047400C4AB6E /* TALBodyLinux.cpp in Sources */,
+				F426DF791DAE047400C4AB6E /* TALBodyWindows.cpp in Sources */,
+				F426DF7C1DAFC81200C4AB6E /* TALBodyMacOSX.cpp in Sources */,
+				F426DF701DAE046C00C4AB6E /* TAL.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F44CF08D1D7181B100EE9C87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F44CF08E1D7181B100EE9C87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F44CF0901D7181B100EE9C87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F44CF0911D7181B100EE9C87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F44CF0831D7181B100EE9C87 /* Build configuration list for PBXProject "DaniTimerTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F44CF08D1D7181B100EE9C87 /* Debug */,
+				F44CF08E1D7181B100EE9C87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F44CF08F1D7181B100EE9C87 /* Build configuration list for PBXNativeTarget "DaniTimerTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F44CF0901D7181B100EE9C87 /* Debug */,
+				F44CF0911D7181B100EE9C87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F44CF0801D7181B100EE9C87 /* Project object */;
+}

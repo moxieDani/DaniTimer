@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\core\DaniTimerCore.h" />
+    <ClInclude Include="..\..\..\core\DaniTimerCoreTypes.h" />
     <ClInclude Include="..\..\..\core\tal\TAL.h" />
     <ClInclude Include="..\..\..\core\tal\talbody\TALBodyWindows.h" />
     <ClInclude Include="DaniTimer\DaniTimer.h" />

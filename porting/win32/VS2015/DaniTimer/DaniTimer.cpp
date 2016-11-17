@@ -3,6 +3,7 @@
 
 static DaniTimerCore* timerCore;
 
+/* Public Functions */
 DaniTimer::DaniTimer()
 {
 	timerCore = new DaniTimerCore();
@@ -14,11 +15,40 @@ DaniTimer::~DaniTimer()
 		delete timerCore;
 }
 
-/* Public Functions */
+int DaniTimer::setTimerMode(int timerMode)
+{
+	int ret = timerCore->setTimerMode(timerMode);
+	return ret;
+}
+
+int DaniTimer::setStopTimeMilliSec(unsigned long targetStopTimeMilliSec)
+{
+	int ret = timerCore->setStopTimeMilliSec(targetStopTimeMilliSec);
+	return ret;
+}
+
+int DaniTimer::setStartTimeMilliSec(unsigned long targetTimeMilliSec)
+{
+	int ret = timerCore->setStartTimeMilliSec(targetTimeMilliSec);
+	return ret;
+}
+
 int DaniTimer::start()
 {
     int ret = timerCore->start();
     return ret;
+}
+
+int DaniTimer::pause()
+{
+	int ret = timerCore->pause();
+	return ret;
+}
+
+int DaniTimer::resume()
+{
+	int ret = timerCore->resume();
+	return ret;
 }
 
 int DaniTimer::stop()
@@ -27,28 +57,10 @@ int DaniTimer::stop()
     return ret;
 }
 
-int DaniTimer::setStopTimeMilliSec(unsigned long targetStopTimeMilliSec)
+int DaniTimer::reset()
 {
-    int ret = timerCore->setStopTimeMilliSec(targetStopTimeMilliSec);
-    return ret;
-}
-
-unsigned long DaniTimer::getCurrentTimeSec()
-{
-	unsigned long ret = timerCore->getCurrentTimeSec();
+	int ret = timerCore->reset();
 	return ret;
-}
-
-unsigned long DaniTimer::getCurrentTimeMilliSec()
-{
-	unsigned long ret = timerCore->getCurrentTimeMilliSec();
-    return ret;
-}
-
-unsigned long DaniTimer::getCurrentTimeMicroSec()
-{
-	unsigned long ret = timerCore->getCurrentTimeMicroSec();
-    return ret;
 }
 
 unsigned long DaniTimer::getElapsedTimeSec()

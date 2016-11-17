@@ -3,62 +3,48 @@
 
 #include <functional>
 #include <thread>
+#include "DaniTimerCoreTypes.h"
 #include "TAL.h"
-
-typedef std::function<int(unsigned long)> DaniTimerCoreCallbackFunc;
-
-namespace callFrequency
-{
-    enum Enum
-    {
-        NONE = 0,
-        CALL_EVERYTIME = 0,
-        CALL_ONCE,
-        LAST_VALUE = CALL_ONCE
-    };
-}
-
-namespace timerStatus
-{
-    enum Enum
-    {
-        PROGRESS = 0x10000000,
-        PAUSE    = 0x10000002,
-        STOP     = 0x10000003
-    };
-}
 
 class DaniTimerCore
 {
 public:
 	DaniTimerCore();
 	~DaniTimerCore();
-    int registerCallback(DaniTimerCoreCallbackFunc callback, callFrequency::Enum callType, unsigned long userSetTimeMilliSec);
+	int setTimerMode(int timerMode);
+	int setStopTimeMilliSec(unsigned long targetTimeMilliSec);
+	int setStartTimeMilliSec(unsigned long targetTimeMilliSec);
 	int start();
 	int stop();
-    int setStopTimeMilliSec(unsigned long targetTimeMilliSec);
-    int setCountDownTimeMilliSec(unsigned long targetTimeMilliSec);
-	unsigned long getCurrentTimeMicroSec();
-    unsigned long getCurrentTimeMilliSec();
-    unsigned long getCurrentTimeSec();
+	int reset();
 	unsigned long getElapsedTimeMicroSec();
     unsigned long getElapsedTimeMilliSec();
     unsigned long getElapsedTimeSec();
+	int registerCallback(DaniTimerCoreCallbackFunc callback, unsigned long repeatIntervalMilliSec);
 
 private:
+	//Functions
     int init();
     unsigned long getMeasureTime();
-    
-    TAL *tal;
-    unsigned long startTimeSec;
-    unsigned long targetStopTimeMilliSec;
-    unsigned long elapsedTimeSec;
-    DaniTimerCoreCallbackFunc callBackFunc;
-    int callType;
-    unsigned long userSetTimeMilliSec;
-    std::thread *callBackThread;
     static void callbackThreadFunc(void*);
-    timerStatus::Enum timerStatus;
+	
+	//Times for calculation
+    unsigned long startTimeMicroSec;
+	unsigned long pauseTimeMicroSec;
+	unsigned long elapsedTimeMicroSec;
+    unsigned long targetStopTimeMilliSec;
+    unsigned long callbackRepeatIntervalMilliSec;
+	
+	//Callback
+    std::thread *callBackThread;
+	DaniTimerCoreCallbackFunc registeredCallBackFunc;
+	
+	//Preference
+	int timerCountMode;
+	int timerStatus;
+    
+    //Timer Adaptation Layer
+    TAL *tal;
 };
 
 #endif /* DANI_TIMER_CORE_H_DEF */

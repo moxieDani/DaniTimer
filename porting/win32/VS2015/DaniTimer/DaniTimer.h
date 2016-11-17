@@ -6,16 +6,17 @@ class DaniTimer
 public:
 	DaniTimer();
 	~DaniTimer();
-    int start();
+	int setTimerMode(int timerMode);
+	int setStopTimeMilliSec(unsigned long targetTimeMilliSec);
+	int setStartTimeMilliSec(unsigned long targetTimeMilliSec);
+	int start();
+	int pause();
+	int resume();
 	int stop();
-    int setStopTimeMilliSec(unsigned long targetStopTimeMilliSec);
-	unsigned long getCurrentTimeMicroSec();
-    unsigned long getCurrentTimeMilliSec();
-    unsigned long getCurrentTimeSec();
+	int reset();
 	unsigned long getElapsedTimeMicroSec();
-    unsigned long getElapsedTimeMilliSec();
-    unsigned long getElapsedTimeSec();
-
+	unsigned long getElapsedTimeMilliSec();
+	unsigned long getElapsedTimeSec();
 };
 
 #endif /* DANI_TIMER_H_DEF */

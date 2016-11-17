@@ -62,5 +62,8 @@
     <ClInclude Include="..\DaniTimerCore.h">
       <Filter>소스 파일\core</Filter>
     </ClInclude>
+    <ClInclude Include="..\DaniTimerCoreTypes.h">
+      <Filter>소스 파일\core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
