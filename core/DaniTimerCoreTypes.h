@@ -10,9 +10,10 @@ namespace TimerCore
     
     enum CurrentState
     {
-        PROGRESS = 0x10000000,
-        PAUSE    = 0x10000001,
-        STOP     = 0x10000002
+        READY    = 0x10000000,
+        PROGRESS = 0x10000001,
+        PAUSE    = 0x10000002,
+        STOP     = 0x10000003
     };
     
     enum Error

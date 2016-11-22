@@ -27,11 +27,21 @@ int main(int argc, const char * argv[]) {
         cout << "Callback registration success!" << endl;
     else
         cout << "Callback registration failed!" << endl;
-    
-    if ( 1 == timer.setStopTimeMilliSec(10000) )
-        cout << "Invalid sequence!(Set stop time failed.) -> Timer is already stopped!" << endl;
+	
+	if ( 0 == timer.setTimerMode(0) )
+		cout << "setTimerMode success!" << endl;
+	else
+		cout << "Callback setTimerMode failed!" << endl;
+
+	if ( 0 == timer.setStartTimeMilliSec(10000) )
+		cout << "setStartTimeMilliSec success!" << endl;
+	else
+		cout << "Invalid sequence!(Set start time failed.)"<< endl;
+	
+	if ( 0 == timer.setStopTimeMilliSec(13000) )
+        cout << "setStopTimeMilliSec success!" << endl;
     else
-        cout << "setStopTimeMilliSec(10000)"<< endl;
+        cout << "Invalid sequence!(Set stop time failed.)"<< endl;
     
     if ( 0 == timer.start())
         cout << "========== Dani Timer started! ========== " << endl;
@@ -51,10 +61,10 @@ int main(int argc, const char * argv[]) {
     cout << "getElapsedTimeMicroSec(Microsec)" << timer.getElapsedTimeMicroSec() << endl;
     
     sleep(1);
-    if ( 0 == timer.stop())
-        cout << "========== Dani Timer stopped! ==========" << endl;
+    if ( 0 == timer.pause())
+        cout << "========== Dani Timer paused! ==========" << endl;
     else
-        cout << "Stop Error!" << endl;
+        cout << "Pause Error!" << endl;
     
     sleep(1);
     cout << "getElapsedTimeSec(sec)" << timer.getElapsedTimeSec() << endl;
@@ -86,10 +96,10 @@ int main(int argc, const char * argv[]) {
     cout << "getElapsedTimeMicroSec(Microsec)" << timer.getElapsedTimeMicroSec() << endl;
     
     sleep(1);
-    if (0 == timer.stop())
-        cout << "========== Dani Timer stopped! ==========" << endl;
+    if (0 == timer.pause())
+        cout << "========== Dani Timer paused! ==========" << endl;
     else
-        cout << "Stop Error!" << endl;
+        cout << "Pause Error!" << endl;
     
     sleep(1);
     cout << "getElapsedTimeSec(sec)" << timer.getElapsedTimeSec() << endl;
@@ -121,10 +131,10 @@ int main(int argc, const char * argv[]) {
     cout << "getElapsedTimeMicroSec(Microsec)" << timer.getElapsedTimeMicroSec() << endl;
     
     sleep(1);
-    if (0 == timer.stop())
-        cout << "========== Dani Timer stopped! ==========" << endl;
+    if (0 == timer.pause())
+        cout << "========== Dani Timer paused! ==========" << endl;
     else
-        cout << "Stop Error!" << endl;
+        cout << "Pause Error!" << endl;
     
     sleep(1);
     cout << "getElapsedTimeSec(sec)" << timer.getElapsedTimeSec() << endl;

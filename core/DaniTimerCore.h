@@ -15,7 +15,7 @@ public:
 	int setStopTimeMilliSec(unsigned long targetTimeMilliSec);
 	int setStartTimeMilliSec(unsigned long targetTimeMilliSec);
 	int start();
-	int stop();
+	int pause();
 	int reset();
 	unsigned long getElapsedTimeMicroSec();
     unsigned long getElapsedTimeMilliSec();
@@ -27,16 +27,19 @@ private:
     int init();
     unsigned long getMeasureTime();
     static void callbackThreadFunc(void*);
-	
+    void timerTaskStart();
+    void timerTaskStop();
+    
 	//Times for calculation
     unsigned long startTimeMicroSec;
 	unsigned long pauseTimeMicroSec;
-	unsigned long elapsedTimeMicroSec;
+    unsigned long elapsedTimeMicroSec;
     unsigned long targetStopTimeMilliSec;
+	unsigned long targetStartTimeMilliSec;
     unsigned long callbackRepeatIntervalMilliSec;
 	
 	//Callback
-    std::thread *callBackThread;
+    std::thread *timerTask;
 	DaniTimerCoreCallbackFunc registeredCallBackFunc;
 	
 	//Preference
