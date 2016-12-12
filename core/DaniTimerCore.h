@@ -12,9 +12,9 @@ public:
 	DaniTimerCore();
 	~DaniTimerCore();
 	int setTimerMode(int timerMode);
-	int setStopTimeMilliSec(unsigned long targetTimeMilliSec);
 	int setStartTimeMilliSec(unsigned long targetTimeMilliSec);
-	int start();
+    int setStopTimeMilliSec(unsigned long targetTimeMilliSec);
+    int start();
 	int pause();
 	int reset();
 	unsigned long getElapsedTimeMicroSec();

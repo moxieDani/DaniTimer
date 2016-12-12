@@ -18,8 +18,10 @@ namespace TimerCore
     
     enum Error
     {
-        SUCCESS          = 0x00000000,
-        INVALID_STATE    = 0x20000001,
-        OPERATION_FAILED = 0x20000002
+        SUCCESS                  = 0x00000000,
+        INVALID_STATE            = 0x20000001,
+        INIT_FAILED              = 0x20000002,
+        START_FAILED             = 0x20000003,
+        REGISTER_CALLBACK_FAILED = 0x20000004        
     };
 }

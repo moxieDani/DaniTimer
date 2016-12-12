@@ -16,7 +16,7 @@
 /* Private Functions */
 int DaniTimerCore::init()
 {
-	int ret = 1;
+    int ret = TimerCore::Error::INIT_FAILED;
 	
 	//Times for calculation
 	startTimeMicroSec              = 0;
@@ -122,25 +122,12 @@ DaniTimerCore::~DaniTimerCore()
 
 int DaniTimerCore::setTimerMode(int timerMode)
 {
-	int ret = 1;
+    int ret = TimerCore::Error::INVALID_STATE;
 	
 	if ( timerStatus == TimerCore::CurrentState::READY )
 	{
 		timerCountMode = timerMode;
-		ret = 0;
-	}
-	
-	return ret;
-}
-
-int DaniTimerCore::setStopTimeMilliSec(unsigned long targetTimeMilliSec)
-{
-	int ret = 1;
-	
-	if ( timerStatus == TimerCore::CurrentState::READY )
-	{
-		targetStopTimeMilliSec = targetTimeMilliSec;
-		ret = 0;
+        ret = TimerCore::Error::SUCCESS;
 	}
 	
 	return ret;
@@ -148,28 +135,40 @@ int DaniTimerCore::setStopTimeMilliSec(unsigned long targetTimeMilliSec)
 
 int DaniTimerCore::setStartTimeMilliSec(unsigned long targetTimeMilliSec)
 {
-	int ret = 1;
+    int ret = TimerCore::Error::INVALID_STATE;
+    
+    if ( timerStatus == TimerCore::CurrentState::READY )
+    {
+        targetStartTimeMilliSec = targetTimeMilliSec;
+        ret = TimerCore::Error::SUCCESS;
+    }
+    
+    return ret;
+}
+
+int DaniTimerCore::setStopTimeMilliSec(unsigned long targetTimeMilliSec)
+{
+    int ret = TimerCore::Error::INVALID_STATE;
 	
 	if ( timerStatus == TimerCore::CurrentState::READY )
 	{
-		targetStartTimeMilliSec = targetTimeMilliSec;
-		ret = 0;
+		targetStopTimeMilliSec = targetTimeMilliSec;
+        ret = TimerCore::Error::SUCCESS;
 	}
 	
 	return ret;
 }
 
-
 int DaniTimerCore::start()
 {
-    int ret = 1;
+    int ret = TimerCore::Error::SUCCESS;
     
     if ( timerCountMode == TimerCore::CountMode::COUNTDOWN )
     {
         if ( targetStopTimeMilliSec >= targetStartTimeMilliSec || targetStartTimeMilliSec == 0)
         {
             reset();
-            ret = 1;
+            ret = TimerCore::Error::START_FAILED;
         }
     }
     else
@@ -177,7 +176,7 @@ int DaniTimerCore::start()
         if ( targetStopTimeMilliSec < targetStartTimeMilliSec)
         {
             reset();
-            ret = 1;
+            ret = TimerCore::Error::START_FAILED;
         }
     }
     
@@ -186,27 +185,29 @@ int DaniTimerCore::start()
     {
         startTimeMicroSec = getMeasureTime();
         timerStatus = TimerCore::CurrentState::PROGRESS;
-        ret = 0;
     }
 	else if (timerStatus == TimerCore::CurrentState::PAUSE)
 	{
 		startTimeMicroSec += (getMeasureTime() - pauseTimeMicroSec);
 		timerStatus = TimerCore::CurrentState::PROGRESS;
-		ret = 0;
 	}
+    else
+    {
+        ret = TimerCore::Error::INVALID_STATE;
+    }
     
     return ret;
 }
 
 int DaniTimerCore::pause()
 {
-    int ret = 1;
+    int ret = TimerCore::Error::INVALID_STATE;
 	
     if ( timerStatus == TimerCore::CurrentState::PROGRESS )
     {
 		pauseTimeMicroSec = getMeasureTime();
         timerStatus = TimerCore::CurrentState::PAUSE;
-        ret = 0;
+        ret = TimerCore::Error::SUCCESS;
     }
     
 	return ret;
@@ -214,7 +215,7 @@ int DaniTimerCore::pause()
 
 int DaniTimerCore::reset()
 {
-	int ret = 1;
+    int ret = TimerCore::Error::SUCCESS;
 
 	//Times for calculation
 	startTimeMicroSec              = 0;
@@ -261,11 +262,11 @@ unsigned long DaniTimerCore::getElapsedTimeMicroSec()
 
 int DaniTimerCore::registerCallback(DaniTimerCoreCallbackFunc callback, unsigned long repeatIntervalMilliSec)
 {
-	int ret = 1;
+    int ret = TimerCore::Error::SUCCESS;
 	
 	if ( callback )
 	{
-		ret = ( registeredCallBackFunc = std::move(callback) ) ? 0 : 1;
+        ret = ( registeredCallBackFunc = std::move(callback) ) ? ret : TimerCore::Error::REGISTER_CALLBACK_FAILED;
 		callbackRepeatIntervalMilliSec = repeatIntervalMilliSec;
 	}
 		
