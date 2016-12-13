@@ -73,7 +73,8 @@ void DaniTimerCore::callbackThreadFunc(void *data)
                     t->registeredCallBackFunc(newCurrentTime);
             }
             
-			if (newCurrentTime > t->targetStopTimeMilliSec)
+			if ( (t->timerCountMode == TimerCore::CountMode::COUNTUP && newCurrentTime > t->targetStopTimeMilliSec) ||
+                (t->timerCountMode == TimerCore::CountMode::COUNTDOWN && newCurrentTime < t->targetStopTimeMilliSec) )
                 t->reset();
             
 			currentTime = newCurrentTime;
@@ -225,7 +226,7 @@ int DaniTimerCore::reset()
 	callbackRepeatIntervalMilliSec = 10;
     
 	//Preference
-	timerStatus = TimerCore::CurrentState::READY;
+	timerStatus = TimerCore::CurrentState::STOP;
 
 	return ret;
 }
@@ -247,6 +248,7 @@ unsigned long DaniTimerCore::getElapsedTimeMilliSec()
 unsigned long DaniTimerCore::getElapsedTimeMicroSec()
 {
 	long ret = 0;
+    
 	if ( timerStatus == TimerCore::CurrentState::PROGRESS )
 		ret = getMeasureTime() - startTimeMicroSec;
 	else if (timerStatus == TimerCore::CurrentState::PAUSE)
