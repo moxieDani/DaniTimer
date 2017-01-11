@@ -21,7 +21,7 @@ private:
     mach_timespec_t measureTime;
 protected:
     int init();
-    unsigned long getMeasureTime();
+    unsigned long long getMeasureTime();
 
 };
 #endif /* __APPLE__ */

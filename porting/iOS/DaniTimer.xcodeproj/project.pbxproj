@@ -6,8 +6,22 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		113A33381E24D19100F69988 /* DaniTimerFramework-Universal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 113A333B1E24D19100F69988 /* Build configuration list for PBXAggregateTarget "DaniTimerFramework-Universal" */;
+			buildPhases = (
+				113A333C1E24D19700F69988 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "DaniTimerFramework-Universal";
+			productName = "DaniTimerFramework-Universal";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		BE2593711DE1FCD400BAC26D /* DaniTimerCoreTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2593701DE1FCD400BAC26D /* DaniTimerCoreTypes.h */; };
+		BE2593711DE1FCD400BAC26D /* DaniTimerCoreTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2593701DE1FCD400BAC26D /* DaniTimerCoreTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F4F5D2661DD4A7D300EB7324 /* DaniTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F5D25C1DD4A7D300EB7324 /* DaniTimer.framework */; };
 		F4F5D26B1DD4A7D300EB7324 /* DaniTimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F5D26A1DD4A7D300EB7324 /* DaniTimerTests.m */; };
 		F4F5D26D1DD4A7D300EB7324 /* DaniTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F5D25F1DD4A7D300EB7324 /* DaniTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -141,11 +155,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2593711DE1FCD400BAC26D /* DaniTimerCoreTypes.h in Headers */,
+				F4F5D26D1DD4A7D300EB7324 /* DaniTimer.h in Headers */,
 				F4F5D2921DD4C10800EB7324 /* TALBodyMacOSX.h in Headers */,
 				F4F5D28A1DD4C0E600EB7324 /* DaniTimerCore.h in Headers */,
 				F4F5D28E1DD4C0F600EB7324 /* TAL.h in Headers */,
-				F4F5D26D1DD4A7D300EB7324 /* DaniTimer.h in Headers */,
-				BE2593711DE1FCD400BAC26D /* DaniTimerCoreTypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +211,10 @@
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "daniel-kisoon-kwon";
 				TargetAttributes = {
+					113A33381E24D19100F69988 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
 					F4F5D25B1DD4A7D200EB7324 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 4FV6J4V7WA;
@@ -223,6 +241,7 @@
 			targets = (
 				F4F5D25B1DD4A7D200EB7324 /* DaniTimer */,
 				F4F5D2641DD4A7D300EB7324 /* DaniTimerTests */,
+				113A33381E24D19100F69988 /* DaniTimerFramework-Universal */,
 			);
 		};
 /* End PBXProject section */
@@ -243,6 +262,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		113A333C1E24D19700F69988 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "######################\n\n# Options\n\n######################\n\n\n\nREVEAL_ARCHIVE_IN_FINDER=false\n\n\n\nFRAMEWORK_NAME=\"${PROJECT_NAME}\"\n\n\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${FRAMEWORK_NAME}.framework\"\n\n\n\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${FRAMEWORK_NAME}.framework\"\n\n\n\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\"\n\n\n\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework\"\n\n\n\n\n\n######################\n\n# Build Frameworks\n\n######################\n\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -scheme ${PROJECT_NAME} -sdk iphonesimulator -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator 2>&1\n\n\n\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -scheme ${PROJECT_NAME} -sdk iphoneos -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos 2>&1\n\n\n\n######################\n\n# Create directory for universal\n\n######################\n\n\n\nrm -rf \"${UNIVERSAL_LIBRARY_DIR}\"\n\n\n\nmkdir \"${UNIVERSAL_LIBRARY_DIR}\"\n\n\n\nmkdir \"${FRAMEWORK}\"\n\n\n\n\n\n######################\n\n# Copy files Framework\n\n######################\n\n\n\ncp -r \"${DEVICE_LIBRARY_PATH}/.\" \"${FRAMEWORK}\"\n\n\n\n\n\n######################\n\n# Make an universal binary\n\n######################\n\n\n\nlipo \"${SIMULATOR_LIBRARY_PATH}/${FRAMEWORK_NAME}\" \"${DEVICE_LIBRARY_PATH}/${FRAMEWORK_NAME}\" -create -output \"${FRAMEWORK}/${FRAMEWORK_NAME}\" | echo\n\n\n\n# For Swift framework, Swiftmodule needs to be copied in the universal framework\n\nif [ -d \"${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\n\ncp -f \"${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/*\" \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\n\nfi\n\n\n\nif [ -d \"${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\n\ncp -f \"${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/*\" \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\n\nfi\n\n\n\n######################\n\n# On Release, copy the result to release directory\n\n######################\n\nOUTPUT_DIR=\"${PROJECT_DIR}/Output/${FRAMEWORK_NAME}-${CONFIGURATION}-iphoneuniversal/\"\n\n\n\nrm -rf \"$OUTPUT_DIR\"\n\nmkdir -p \"$OUTPUT_DIR\"\n\n\n\ncp -r \"${FRAMEWORK}\" \"$OUTPUT_DIR\"\n\n\n\nif [ ${REVEAL_ARCHIVE_IN_FINDER} = true ]; then\n\nopen \"${OUTPUT_DIR}/\"\n\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F4F5D2571DD4A7D200EB7324 /* Sources */ = {
@@ -275,6 +310,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		113A33391E24D19100F69988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		113A333A1E24D19100F69988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		F4F5D26E1DD4A7D300EB7324 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -316,7 +365,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -361,7 +410,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -432,6 +481,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		113A333B1E24D19100F69988 /* Build configuration list for PBXAggregateTarget "DaniTimerFramework-Universal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				113A33391E24D19100F69988 /* Debug */,
+				113A333A1E24D19100F69988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		F4F5D2561DD4A7D200EB7324 /* Build configuration list for PBXProject "DaniTimer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

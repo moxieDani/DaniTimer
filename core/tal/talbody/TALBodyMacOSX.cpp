@@ -28,9 +28,9 @@ int TALBodyMacOSX::init()
     return 0;
 }
 
-unsigned long TALBodyMacOSX::getMeasureTime()
+unsigned long long TALBodyMacOSX::getMeasureTime()
 {
-    unsigned long ret = 0;
+    unsigned long long ret = 0;
     
     if ( KERN_SUCCESS == host_get_clock_service(mach_host_self(), REALTIME_CLOCK, &measureClock) )
     {

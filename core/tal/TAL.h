@@ -15,7 +15,7 @@ public:
     TAL();
     virtual ~TAL();
     virtual int init() = 0;
-    virtual unsigned long getMeasureTime() = 0;
+    virtual unsigned long long getMeasureTime() = 0;
 
 };
 

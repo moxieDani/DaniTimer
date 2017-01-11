@@ -1,4 +1,4 @@
-typedef std::function<int(unsigned long)> DaniTimerCoreCallbackFunc;
+typedef std::function<int(unsigned long long)> DaniTimerCoreCallbackFunc;
 
 namespace TimerCore
 {
@@ -18,10 +18,12 @@ namespace TimerCore
     
     enum Error
     {
-        SUCCESS                  = 0x00000000,
-        INVALID_STATE            = 0x20000001,
-        INIT_FAILED              = 0x20000002,
-        START_FAILED             = 0x20000003,
-        REGISTER_CALLBACK_FAILED = 0x20000004        
+        SUCCESS                    = 0x00000000,
+        INVALID_STATE              = 0x20000001,
+        INIT_FAILED                = 0x20000002,
+        START_FAILED               = 0x20000003,
+		SET_ONTIME_DELIGATE_FAILED = 0x20000004,
+		SET_ONTIME_INTERVAL_FAILED = 0x20000005,
+		REGISTER_CALLBACK_FAILED   = 0x20000006
     };
 }
