@@ -11,7 +11,7 @@
 
 TALBodyMacOSX::TALBodyMacOSX()
 {
-    
+    init();
 }
 
 TALBodyMacOSX::~TALBodyMacOSX()

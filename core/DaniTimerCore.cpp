@@ -16,7 +16,7 @@
 /* Private Functions */
 int DaniTimerCore::init()
 {
-    int ret = TimerCore::Error::INIT_FAILED;
+    int ret = TimerCore::Error::SUCCESS;
 	
 	//Times for calculation
 	startTimeMicroSec              = 0;
@@ -34,7 +34,6 @@ int DaniTimerCore::init()
 	
 	//Timer Adaptation Layer
 	tal = new TALBODY_CLASS;
-	ret = tal->init();
     
     //Timer Task
     timerTask = nullptr;
