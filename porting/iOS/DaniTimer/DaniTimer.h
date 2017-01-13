@@ -9,7 +9,9 @@
 #define DANITIMER_H_DEF
 
 #import <UIKit/UIKit.h>
-@protocol OnTimeDelegate <NSObject>
+#import "DaniTimerProperty.h"
+
+@protocol onTimeDelegate <NSObject>
 
 @optional
 -(void)onTime:(NSNumber*)milliSec;
@@ -18,17 +20,20 @@
 
 @interface DaniTimer: NSObject
 
-@property (nonatomic,weak) id<OnTimeDelegate> delegate;
+@property (nonatomic,weak) id<onTimeDelegate> delegate;
 
 - (int) start;
 - (int) pause;
 - (int) reset;
-- (int) setStopTimeMilliSec:(unsigned long long) targetStopTimeMilliSec;
-- (int) setStartTimeMilliSec:(unsigned long long) targetTimeMilliSec;
+- (int) setBeginTimeMilliSec:(unsigned long long) targetTimeMilliSec;
+- (int) setEndTimeMilliSec:(unsigned long long) targetStopTimeMilliSec;
 - (unsigned long long) getElapsedTimeMicroSec;
 - (unsigned long long) getElapsedTimeMilliSec;
 - (unsigned long long) getElapsedTimeSec;
-- (int) setOnTimeDelegate:(id<OnTimeDelegate>)delegate withRepeatInterval:(unsigned long long)milliSec;
+- (int) setOnTimeDelegate:(id<onTimeDelegate>)delegate withRepeatInterval:(unsigned long long)targetTimeMilliSec;
+
+template <typename PropertyValue>
+- (int) setProperty:(int)propertyType proertyValue:(PropertyValue) value;
 @end
 
 #endif

@@ -45,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11C9900A1E28BCBB00106E93 /* DaniTimerProperty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DaniTimerProperty.h; sourceTree = "<group>"; };
 		BE2593701DE1FCD400BAC26D /* DaniTimerCoreTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DaniTimerCoreTypes.h; path = ../../../core/DaniTimerCoreTypes.h; sourceTree = "<group>"; };
 		F4F5D25C1DD4A7D300EB7324 /* DaniTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DaniTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F5D25F1DD4A7D300EB7324 /* DaniTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DaniTimer.h; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 				F4F5D25F1DD4A7D300EB7324 /* DaniTimer.h */,
 				F4F5D2761DD4A86F00EB7324 /* DaniTimer.mm */,
 				F4F5D2601DD4A7D300EB7324 /* Info.plist */,
+				11C9900A1E28BCBB00106E93 /* DaniTimerProperty.h */,
 			);
 			path = DaniTimer;
 			sourceTree = "<group>";

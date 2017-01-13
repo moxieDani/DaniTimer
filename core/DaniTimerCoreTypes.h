@@ -1,5 +1,3 @@
-typedef std::function<int(unsigned long long)> DaniTimerCoreCallbackFunc;
-
 namespace TimerCore
 {
 	enum CountMode
@@ -24,6 +22,13 @@ namespace TimerCore
         START_FAILED               = 0x20000003,
 		SET_ONTIME_DELIGATE_FAILED = 0x20000004,
 		SET_ONTIME_INTERVAL_FAILED = 0x20000005,
-		REGISTER_CALLBACK_FAILED   = 0x20000006
+		SET_PROPERTY_FAILED        = 0x20000006
     };
+	
+	enum Property
+	{
+		TIMER_MODE                  = 0x30000001,
+		BEGIN_TIME_MILLI_SECOND     = 0x30000002,
+		END_TIME_MILLI_SECOND       = 0x30000003
+	};
 }
