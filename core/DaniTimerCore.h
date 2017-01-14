@@ -2,7 +2,6 @@
 #define DANI_TIMER_CORE_H_DEF
 
 #include <functional>
-#include <thread>
 #include "DaniTimerCoreTypes.h"
 #include "TAL.h"
 
@@ -11,9 +10,6 @@ class DaniTimerCore
 public:
 	DaniTimerCore();
 	~DaniTimerCore();
-	int setTimerMode(int timerMode);
-	int setBeginTimeMilliSec(unsigned long long targetTimeMilliSec);
-    int setEndTimeMilliSec(unsigned long long targetTimeMilliSec);
     int start();
 	int pause();
 	int reset();
@@ -21,32 +17,23 @@ public:
     unsigned long long getElapsedTimeMilliSec();
     unsigned long long getElapsedTimeSec();
 	int getCurrentState();
-
-	template <typename PropertyValue>
-	int setProperty(int propertyType, PropertyValue value);
-
+    int setProperty(int type, unsigned long long value);
+    
 private:
 	//Functions
     int init();
     unsigned long long getMeasureTime();
-    static void callbackThreadFunc(void*);
-    void timerTaskStart();
-    void timerTaskStop();
     
 	//Times for calculation
     unsigned long long measuredStartPoint;
 	unsigned long long measuredPausePoint;
     unsigned long long elapsedTimeMicroSec;
-    unsigned long long targetEndTimeMilliSec;
-	unsigned long long targetBeginTimeMilliSec;
-    unsigned long long callbackRepeatIntervalMilliSec;
-	
-	//Callback
-    std::thread *timerTask;
-	
+    
 	//Preference
 	int timerCountMode;
 	int timerStatus;
+    unsigned long long targetEndTimeMilliSec;
+    unsigned long long targetBeginTimeMilliSec;
     
     //Timer Adaptation Layer
     TAL *tal;

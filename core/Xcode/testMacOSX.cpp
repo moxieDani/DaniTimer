@@ -11,35 +11,23 @@
 #include <unistd.h>
 
 using namespace std;
-int callBackTest( unsigned long a );
-
-int callBackTest( unsigned long a )
-{
-    printf("[CallbackTest] Current time(%lu)\n", a);
-    return 0;
-}
 
 int main(int argc, const char * argv[]) {
     cout << "Dani Timer test\n";
     
     DaniTimerCore timer;
-    if ( 0 == timer.registerCallback(callBackTest, 1000))
-        cout << "Callback registration success!" << endl;
-    else
-        cout << "Callback registration failed!" << endl;
-	
-	if ( 0 == timer.setTimerMode(0) )
+    if ( 0 == timer.setProperty(TimerCore::Property::TIMER_MODE, TimerCore::CountMode::COUNTDOWN) )
 		cout << "setTimerMode success!" << endl;
 	else
-		cout << "Callback setTimerMode failed!" << endl;
+		cout << "setTimerMode failed!" << endl;
 
-	if ( 0 == timer.setStartTimeMilliSec(10000) )
-		cout << "setStartTimeMilliSec success!" << endl;
+    if ( 0 == timer.setProperty(TimerCore::Property::BEGIN_TIME_MILLI_SECOND, 10000) )
+		cout << "setProperty(TimerCore::Property::BEGIN_TIME_MILLI_SECOND) success!" << endl;
 	else
 		cout << "Invalid sequence!(Set start time failed.)"<< endl;
 	
-	if ( 0 == timer.setStopTimeMilliSec(13000) )
-        cout << "setStopTimeMilliSec success!" << endl;
+	if ( 0 == timer.setProperty(TimerCore::Property::END_TIME_MILLI_SECOND, 2220) )
+        cout << "setProperty(TimerCore::Property::END_TIME_MILLI_SECOND) success!" << endl;
     else
         cout << "Invalid sequence!(Set stop time failed.)"<< endl;
     
@@ -50,14 +38,11 @@ int main(int argc, const char * argv[]) {
     
     sleep(1);
     cout << "getElapsedTimeSec(sec)" << timer.getElapsedTimeSec() << endl;
-    cout << "getElapsedTimeSec(sec)" << timer.getElapsedTimeSec() << endl;
     
     sleep(1);
     cout << "getElapsedTimeMilliSec(Millisec)" << timer.getElapsedTimeMilliSec() << endl;
-    cout << "getElapsedTimeMilliSec(Millisec)" << timer.getElapsedTimeMilliSec() << endl;
     
     sleep(1);
-    cout << "getElapsedTimeMicroSec(Microsec)" << timer.getElapsedTimeMicroSec() << endl;
     cout << "getElapsedTimeMicroSec(Microsec)" << timer.getElapsedTimeMicroSec() << endl;
     
     sleep(1);
@@ -165,5 +150,6 @@ int main(int argc, const char * argv[]) {
     sleep(1);
     cout << "getElapsedTimeMicroSec(Microsec)" << timer.getElapsedTimeMicroSec() << endl;
     cout << "getElapsedTimeMicroSec(Microsec)" << timer.getElapsedTimeMicroSec() << endl;
+    
     return 0;
 }

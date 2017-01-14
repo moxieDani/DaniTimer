@@ -25,15 +25,12 @@
 - (int) start;
 - (int) pause;
 - (int) reset;
-- (int) setBeginTimeMilliSec:(unsigned long long) targetTimeMilliSec;
-- (int) setEndTimeMilliSec:(unsigned long long) targetStopTimeMilliSec;
 - (unsigned long long) getElapsedTimeMicroSec;
 - (unsigned long long) getElapsedTimeMilliSec;
 - (unsigned long long) getElapsedTimeSec;
-- (int) setOnTimeDelegate:(id<onTimeDelegate>)delegate withRepeatInterval:(unsigned long long)targetTimeMilliSec;
+- (int) setOnTimeDelegate:(id<onTimeDelegate>)delegate;
+- (int) setProperty:(int)propertyType proertyValue:(NSInteger)value;
 
-template <typename PropertyValue>
-- (int) setProperty:(int)propertyType proertyValue:(PropertyValue) value;
 @end
 
 #endif

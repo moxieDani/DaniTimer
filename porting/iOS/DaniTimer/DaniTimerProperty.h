@@ -10,9 +10,14 @@
 #define Header_h
 
 typedef enum {
-	TIMER_MODE                  = 0x30000001,
-	BEGIN_TIME_MILLI_SECOND     = 0x30000002,
-	END_TIME_MILLI_SECOND       = 0x30000003
+	TIMER_MODE                            = 0x30000001,
+    
+	BEGIN_TIME_MILLI_SECOND               = 0x30000002,
+    
+	END_TIME_MILLI_SECOND                 = 0x30000003,
+    
+    ON_TIME_REAPEAT_INTERVAL_MILLI_SECOND = 0x30000004
+    
 } DaniProperty;
 
 #endif /* Header_h */

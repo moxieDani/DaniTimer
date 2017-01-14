@@ -15,9 +15,7 @@
 
 @property (nonatomic) DaniTimerCore *timerCore;
 @property (nonatomic, strong) NSThread *t;
-@property (nonatomic) unsigned long long callbackRepeatIntervalMilliSec;
-@property (nonatomic) unsigned long long targetStopTimeMilliSec;
-@property (nonatomic) unsigned long long targetStartTimeMilliSec;
+@property (nonatomic) unsigned long long onTimeRepeatIntervalMilliSec;
 
 @end
 
@@ -32,17 +30,13 @@
     if( self != nil )
     {
         self.timerCore = new DaniTimerCore();
-		self.callbackRepeatIntervalMilliSec = 10;
-		self.targetStopTimeMilliSec = 0;
-		self.targetStartTimeMilliSec = 0;
+		self.onTimeRepeatIntervalMilliSec = 10;
     }
-    [self setProperty:0 proertyValue:100];
     return self;
 }
 
 #pragma mark -
 #pragma mark Public APIs
-
 - (int) start {
     int ret = self.timerCore->start();
 	[self timerTaskStart];
@@ -56,21 +50,8 @@
 
 - (int) reset {
     int ret = self.timerCore->reset();
-	self.targetStopTimeMilliSec = 0;
-	self.targetStartTimeMilliSec = 0;
-    return ret;
-}
-
-- (int) setBeginTimeMilliSec:(unsigned long long)  targetTimeMilliSec {
-	self.targetStartTimeMilliSec = targetTimeMilliSec;
-	int ret = self.timerCore->setBeginTimeMilliSec(self.targetStartTimeMilliSec);
+    [self timerTaskStop];
 	return ret;
-}
-
-- (int) setEndTimeMilliSec:(unsigned long long) targetTimeMilliSec {
-	self.targetStopTimeMilliSec = targetTimeMilliSec;
-    int ret = self.timerCore->setEndTimeMilliSec(self.targetStopTimeMilliSec);
-    return ret;
 }
 
 - (unsigned long long) getElapsedTimeMicroSec {
@@ -88,62 +69,67 @@
     return ret;
 }
 
-- (int) setOnTimeDelegate:(id<onTimeDelegate>)delegate withRepeatInterval:(unsigned long long)targetTimeMilliSec {
+- (int) setOnTimeDelegate:(id<onTimeDelegate>)delegate {
 	int ret = TimerCore::Error::SUCCESS;
 	
 	self.delegate = delegate;
 	if( [self.delegate respondsToSelector:@selector(onTime:)] == NO ) {
 		ret = TimerCore::Error::SET_ONTIME_DELIGATE_FAILED;
 	}
-	
-	if ( targetTimeMilliSec > 0 ) {
-		self.callbackRepeatIntervalMilliSec = targetTimeMilliSec;
-	}
-	
+    
 	return ret;
 }
 
-- (void) callbackThreadFunc {
+- (int) setProperty:(int)propertyType proertyValue:(NSInteger)value {
+    int ret = TimerCore::Error::SUCCESS;
+    
+    switch (propertyType) {
+        case ON_TIME_REAPEAT_INTERVAL_MILLI_SECOND:
+            self.onTimeRepeatIntervalMilliSec = (value > 0) ? value : 10;
+            if ( value <= 0 )
+                ret = TimerCore::Error::SET_PROPERTY_FAILED;
+            break;
+        default:
+            ret = self.timerCore->setProperty(propertyType, value);
+            break;
+    }
+    return ret;
+}
+#pragma mark -
+#pragma mark Private APIs
+- (void) onTimeThreadFunc {
 	unsigned long long currentTime = 0;
 	unsigned long long newCurrentTime = 0;
 	
-	if ( self.t )
-	{
-		while ( [self getCurrentState] != TimerCore::CurrentState::STOP )
-		{
-			if ([self getCurrentState] == TimerCore::CurrentState::PAUSE ||
-				[self getCurrentState] == TimerCore::CurrentState::READY)
-				continue;
-			
-			newCurrentTime = [self getElapsedTimeMilliSec];
-			
-			if ( currentTime/1e3 == newCurrentTime/1e3 )
-				continue;
-			
-			if ( self.delegate )
-			{
-				if ( ( newCurrentTime % self.callbackRepeatIntervalMilliSec ) == 0 )
-					if ( [self.delegate respondsToSelector:@selector(onTime:)] )
-						[self.delegate performSelector:@selector(onTime:) withObject:[NSNumber numberWithUnsignedLongLong:newCurrentTime]];
-			}
-			
-			if ( ([self getCurrentState] == TimerCore::CountMode::COUNTUP && newCurrentTime > self.targetStopTimeMilliSec) ||
-				([self getCurrentState] == TimerCore::CountMode::COUNTDOWN && newCurrentTime < self.targetStopTimeMilliSec) )
-				[self reset];
-			
-			currentTime = newCurrentTime;
-		}
+	while ( [self getCurrentState] != TimerCore::CurrentState::STOP )
+    {
+        if ([self getCurrentState] == TimerCore::CurrentState::PAUSE ||
+            [self getCurrentState] == TimerCore::CurrentState::READY)
+            continue;
+        
+        newCurrentTime = [self getElapsedTimeMilliSec];
+        
+        if ( currentTime/1e3 == newCurrentTime/1e3 )
+            continue;
+        
+        if ( self.delegate && [self.delegate respondsToSelector:@selector(onTime:)] )
+        {
+            if ( ( newCurrentTime % self.onTimeRepeatIntervalMilliSec ) == 0 )
+                    [self.delegate performSelector:@selector(onTime:) withObject:[NSNumber numberWithUnsignedLongLong:newCurrentTime]];
+        }
+        currentTime = newCurrentTime;
 	}
 }
 
 - (void) timerTaskStart {
-	self.t = [[NSThread alloc] initWithTarget:self selector:@selector(callbackThreadFunc) object:nil];
+    if ( self.t == nil )
+        self.t = [[NSThread alloc] initWithTarget:self selector:@selector(onTimeThreadFunc) object:nil];
 	if ( self.t )
 		[self.t start];
 }
 
 - (void) timerTaskStop {
-	if ( [self.t isCancelled] == NO){
+	if ( [self.t isCancelled] == NO ){
 		[self.t cancel];
 		self.t = nil;
 	}
@@ -152,6 +138,7 @@
 - (int) getCurrentState {
 	return self.timerCore->getCurrentState();
 }
+
 
 #pragma mark -
 #pragma mark Destroy
