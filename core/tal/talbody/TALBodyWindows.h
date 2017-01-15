@@ -21,7 +21,7 @@ private:
     LARGE_INTEGER measureTime;
 protected:
     int init();
-    unsigned long getMeasureTime();
+    unsigned long long getMeasureTime();
     
 };
 

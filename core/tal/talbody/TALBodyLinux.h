@@ -20,7 +20,7 @@ private:
     struct timespec measureTime;
 protected:
     int init();
-    unsigned long getMeasureTime();
+    unsigned long long getMeasureTime();
 };
 
 #endif /* __linux__ */

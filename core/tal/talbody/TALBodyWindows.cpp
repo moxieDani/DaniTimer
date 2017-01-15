@@ -11,7 +11,7 @@
 
 TALBodyWindows::TALBodyWindows()
 {
-    
+	init();
 }
 
 TALBodyWindows::~TALBodyWindows()
@@ -26,13 +26,13 @@ int TALBodyWindows::init()
     return 0;
 }
 
-unsigned long TALBodyWindows::getMeasureTime()
+unsigned long long TALBodyWindows::getMeasureTime()
 {
-    unsigned long ret = 0;
+    unsigned long long ret = 0;
     
     measureTime.QuadPart = 0;
     if ( QueryPerformanceCounter(&measureTime) )
-        ret = (unsigned long)(double(measureTime.QuadPart) / (double(frequency.QuadPart)) * 1e6);
+        ret = (unsigned long long)(double(measureTime.QuadPart) / (double(frequency.QuadPart)) * 1e6);
     
     return ret;
 }

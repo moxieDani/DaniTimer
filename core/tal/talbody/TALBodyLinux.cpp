@@ -11,7 +11,7 @@
 
 TALBodyLinux::TALBodyLinux()
 {
-    
+	init();
 }
 
 TALBodyLinux::~TALBodyLinux()
@@ -27,9 +27,9 @@ int TALBodyLinux::init()
     return 0;
 }
 
-unsigned long TALBodyLinux::getMeasureTime()
+unsigned long long TALBodyLinux::getMeasureTime()
 {
-    unsigned long ret = 0;
+    unsigned long long ret = 0;
     
     if( 0 == clock_gettime(CLOCK_MONOTONIC, &measureTime) )
         ret = ( ( measureTime.tv_sec * 1e9 ) + measureTime.tv_nsec ) / 1e3;
