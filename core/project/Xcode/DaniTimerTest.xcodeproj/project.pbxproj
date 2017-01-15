@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F426DF701DAE046C00C4AB6E /* TAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F426DF6E1DAE046C00C4AB6E /* TAL.cpp */; };
-		F426DF771DAE047400C4AB6E /* TALBodyLinux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F426DF711DAE047400C4AB6E /* TALBodyLinux.cpp */; };
-		F426DF791DAE047400C4AB6E /* TALBodyWindows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F426DF751DAE047400C4AB6E /* TALBodyWindows.cpp */; };
-		F426DF7C1DAFC81200C4AB6E /* TALBodyMacOSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F426DF7A1DAFC81200C4AB6E /* TALBodyMacOSX.cpp */; };
-		F4903FF61DD21E7000575295 /* DaniTimerCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4903FF41DD21E7000575295 /* DaniTimerCore.cpp */; };
-		F4A737511DAFD89400CFF620 /* testMacOSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4A737501DAFD89400CFF620 /* testMacOSX.cpp */; };
+		BEBF8DFF1E2BC2FD0007754F /* DaniTimerCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEBF8DFC1E2BC2FD0007754F /* DaniTimerCore.cpp */; };
+		BEBF8E021E2BC30A0007754F /* TAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEBF8E001E2BC30A0007754F /* TAL.cpp */; };
+		BEBF8E091E2BC3120007754F /* TALBodyLinux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEBF8E031E2BC3120007754F /* TALBodyLinux.cpp */; };
+		BEBF8E0A1E2BC3120007754F /* TALBodyMacOSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEBF8E051E2BC3120007754F /* TALBodyMacOSX.cpp */; };
+		BEBF8E0B1E2BC3120007754F /* TALBodyWindows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEBF8E071E2BC3120007754F /* TALBodyWindows.cpp */; };
+		BEBF8E0F1E2BC32F0007754F /* DaniTimerCoreTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEBF8E0E1E2BC32F0007754F /* DaniTimerCoreTest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,19 +28,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BE25936F1DE1FC6D00BAC26D /* DaniTimerCoreTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DaniTimerCoreTypes.h; path = ../DaniTimerCoreTypes.h; sourceTree = "<group>"; };
-		F426DF6E1DAE046C00C4AB6E /* TAL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TAL.cpp; path = ../tal/TAL.cpp; sourceTree = "<group>"; };
-		F426DF6F1DAE046C00C4AB6E /* TAL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAL.h; path = ../tal/TAL.h; sourceTree = "<group>"; };
-		F426DF711DAE047400C4AB6E /* TALBodyLinux.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TALBodyLinux.cpp; path = ../tal/talbody/TALBodyLinux.cpp; sourceTree = "<group>"; };
-		F426DF721DAE047400C4AB6E /* TALBodyLinux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALBodyLinux.h; path = ../tal/talbody/TALBodyLinux.h; sourceTree = "<group>"; };
-		F426DF751DAE047400C4AB6E /* TALBodyWindows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TALBodyWindows.cpp; path = ../tal/talbody/TALBodyWindows.cpp; sourceTree = "<group>"; };
-		F426DF761DAE047400C4AB6E /* TALBodyWindows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALBodyWindows.h; path = ../tal/talbody/TALBodyWindows.h; sourceTree = "<group>"; };
-		F426DF7A1DAFC81200C4AB6E /* TALBodyMacOSX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TALBodyMacOSX.cpp; path = ../tal/talbody/TALBodyMacOSX.cpp; sourceTree = "<group>"; };
-		F426DF7B1DAFC81200C4AB6E /* TALBodyMacOSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALBodyMacOSX.h; path = ../tal/talbody/TALBodyMacOSX.h; sourceTree = "<group>"; };
+		BEBF8DFC1E2BC2FD0007754F /* DaniTimerCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DaniTimerCore.cpp; path = ../../DaniTimerCore.cpp; sourceTree = "<group>"; };
+		BEBF8DFD1E2BC2FD0007754F /* DaniTimerCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DaniTimerCore.h; path = ../../DaniTimerCore.h; sourceTree = "<group>"; };
+		BEBF8DFE1E2BC2FD0007754F /* DaniTimerCoreTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DaniTimerCoreTypes.h; path = ../../DaniTimerCoreTypes.h; sourceTree = "<group>"; };
+		BEBF8E001E2BC30A0007754F /* TAL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TAL.cpp; path = ../../tal/TAL.cpp; sourceTree = "<group>"; };
+		BEBF8E011E2BC30A0007754F /* TAL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAL.h; path = ../../tal/TAL.h; sourceTree = "<group>"; };
+		BEBF8E031E2BC3120007754F /* TALBodyLinux.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TALBodyLinux.cpp; path = ../../tal/talbody/TALBodyLinux.cpp; sourceTree = "<group>"; };
+		BEBF8E041E2BC3120007754F /* TALBodyLinux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALBodyLinux.h; path = ../../tal/talbody/TALBodyLinux.h; sourceTree = "<group>"; };
+		BEBF8E051E2BC3120007754F /* TALBodyMacOSX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TALBodyMacOSX.cpp; path = ../../tal/talbody/TALBodyMacOSX.cpp; sourceTree = "<group>"; };
+		BEBF8E061E2BC3120007754F /* TALBodyMacOSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALBodyMacOSX.h; path = ../../tal/talbody/TALBodyMacOSX.h; sourceTree = "<group>"; };
+		BEBF8E071E2BC3120007754F /* TALBodyWindows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TALBodyWindows.cpp; path = ../../tal/talbody/TALBodyWindows.cpp; sourceTree = "<group>"; };
+		BEBF8E081E2BC3120007754F /* TALBodyWindows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALBodyWindows.h; path = ../../tal/talbody/TALBodyWindows.h; sourceTree = "<group>"; };
+		BEBF8E0E1E2BC32F0007754F /* DaniTimerCoreTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DaniTimerCoreTest.cpp; path = ../../DaniTimerCoreTest.cpp; sourceTree = "<group>"; };
 		F44CF0881D7181B100EE9C87 /* DaniTimerTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DaniTimerTest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4903FF41DD21E7000575295 /* DaniTimerCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DaniTimerCore.cpp; path = ../DaniTimerCore.cpp; sourceTree = "<group>"; };
-		F4903FF51DD21E7000575295 /* DaniTimerCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DaniTimerCore.h; path = ../DaniTimerCore.h; sourceTree = "<group>"; };
-		F4A737501DAFD89400CFF620 /* testMacOSX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testMacOSX.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +54,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BEBF8E101E2BC3340007754F /* test */ = {
+			isa = PBXGroup;
+			children = (
+				BEBF8E0E1E2BC32F0007754F /* DaniTimerCoreTest.cpp */,
+			);
+			name = test;
+			sourceTree = "<group>";
+		};
 		F426DF5B1DABEF3900C4AB6E /* core */ = {
 			isa = PBXGroup;
 			children = (
-				F4903FF41DD21E7000575295 /* DaniTimerCore.cpp */,
-				F4903FF51DD21E7000575295 /* DaniTimerCore.h */,
-				BE25936F1DE1FC6D00BAC26D /* DaniTimerCoreTypes.h */,
+				BEBF8DFC1E2BC2FD0007754F /* DaniTimerCore.cpp */,
+				BEBF8DFD1E2BC2FD0007754F /* DaniTimerCore.h */,
+				BEBF8DFE1E2BC2FD0007754F /* DaniTimerCoreTypes.h */,
 				F426DF5F1DABEF8100C4AB6E /* TAL */,
 			);
 			name = core;
@@ -68,8 +76,8 @@
 		F426DF5F1DABEF8100C4AB6E /* TAL */ = {
 			isa = PBXGroup;
 			children = (
-				F426DF6E1DAE046C00C4AB6E /* TAL.cpp */,
-				F426DF6F1DAE046C00C4AB6E /* TAL.h */,
+				BEBF8E001E2BC30A0007754F /* TAL.cpp */,
+				BEBF8E011E2BC30A0007754F /* TAL.h */,
 				F426DF691DABF14F00C4AB6E /* TALBody */,
 			);
 			name = TAL;
@@ -78,12 +86,12 @@
 		F426DF691DABF14F00C4AB6E /* TALBody */ = {
 			isa = PBXGroup;
 			children = (
-				F426DF711DAE047400C4AB6E /* TALBodyLinux.cpp */,
-				F426DF721DAE047400C4AB6E /* TALBodyLinux.h */,
-				F426DF7A1DAFC81200C4AB6E /* TALBodyMacOSX.cpp */,
-				F426DF7B1DAFC81200C4AB6E /* TALBodyMacOSX.h */,
-				F426DF751DAE047400C4AB6E /* TALBodyWindows.cpp */,
-				F426DF761DAE047400C4AB6E /* TALBodyWindows.h */,
+				BEBF8E031E2BC3120007754F /* TALBodyLinux.cpp */,
+				BEBF8E041E2BC3120007754F /* TALBodyLinux.h */,
+				BEBF8E051E2BC3120007754F /* TALBodyMacOSX.cpp */,
+				BEBF8E061E2BC3120007754F /* TALBodyMacOSX.h */,
+				BEBF8E071E2BC3120007754F /* TALBodyWindows.cpp */,
+				BEBF8E081E2BC3120007754F /* TALBodyWindows.h */,
 			);
 			name = TALBody;
 			sourceTree = "<group>";
@@ -92,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				F426DF5B1DABEF3900C4AB6E /* core */,
-				F44CF08A1D7181B100EE9C87 /* DaniTimerTest */,
+				BEBF8E101E2BC3340007754F /* test */,
 				F44CF0891D7181B100EE9C87 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,14 +111,6 @@
 				F44CF0881D7181B100EE9C87 /* DaniTimerTest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		F44CF08A1D7181B100EE9C87 /* DaniTimerTest */ = {
-			isa = PBXGroup;
-			children = (
-				F4A737501DAFD89400CFF620 /* testMacOSX.cpp */,
-			);
-			path = DaniTimerTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,12 +169,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4903FF61DD21E7000575295 /* DaniTimerCore.cpp in Sources */,
-				F4A737511DAFD89400CFF620 /* testMacOSX.cpp in Sources */,
-				F426DF771DAE047400C4AB6E /* TALBodyLinux.cpp in Sources */,
-				F426DF791DAE047400C4AB6E /* TALBodyWindows.cpp in Sources */,
-				F426DF7C1DAFC81200C4AB6E /* TALBodyMacOSX.cpp in Sources */,
-				F426DF701DAE046C00C4AB6E /* TAL.cpp in Sources */,
+				BEBF8E0F1E2BC32F0007754F /* DaniTimerCoreTest.cpp in Sources */,
+				BEBF8E091E2BC3120007754F /* TALBodyLinux.cpp in Sources */,
+				BEBF8DFF1E2BC2FD0007754F /* DaniTimerCore.cpp in Sources */,
+				BEBF8E0A1E2BC3120007754F /* TALBodyMacOSX.cpp in Sources */,
+				BEBF8E021E2BC30A0007754F /* TAL.cpp in Sources */,
+				BEBF8E0B1E2BC3120007754F /* TALBodyWindows.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
