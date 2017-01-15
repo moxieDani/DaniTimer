@@ -147,11 +147,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\DaniTimerCore.cpp" />
+    <ClCompile Include="..\DaniTimerCoreTest.cpp" />
     <ClCompile Include="..\tal\TAL.cpp" />
     <ClCompile Include="..\tal\talbody\TALBodyLinux.cpp" />
     <ClCompile Include="..\tal\talbody\TALBodyMacOSX.cpp" />
     <ClCompile Include="..\tal\talbody\TALBodyWindows.cpp" />
-    <ClCompile Include="testVS2015.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DaniTimerCore.h" />

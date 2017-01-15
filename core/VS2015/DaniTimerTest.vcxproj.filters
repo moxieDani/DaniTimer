@@ -27,9 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="testVS2015.cpp">
-      <Filter>소스 파일\DaniTimerTest</Filter>
-    </ClCompile>
     <ClCompile Include="..\tal\TAL.cpp">
       <Filter>소스 파일\core\TAL</Filter>
     </ClCompile>
@@ -44,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="..\DaniTimerCore.cpp">
       <Filter>소스 파일\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DaniTimerCoreTest.cpp">
+      <Filter>소스 파일\DaniTimerTest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
