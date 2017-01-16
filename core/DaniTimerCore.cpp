@@ -89,7 +89,7 @@ int DaniTimerCore::start()
 
 int DaniTimerCore::pause()
 {
-    int ret = TimerCore::Error::INVALID_STATE;
+    int ret = TimerCore::Error::PAUSE_FAILED;
 	
     if ( timerStatus == TimerCore::CurrentState::PROGRESS )
     {

@@ -157,6 +157,7 @@
     <ClCompile Include="DaniTimerSample.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\porting\win32\VS2015\DaniTimer\DaniTimerProperty.h" />
     <ClInclude Include="inc\DaniTimer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

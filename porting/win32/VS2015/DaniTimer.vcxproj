@@ -83,6 +83,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <OutputFile>$(SolutionDir)$(ProjectName)_$(Platform)_$(Configuration)$(TargetExt)</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -97,6 +100,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <OutputFile>$(SolutionDir)$(ProjectName)_$(Platform)_$(Configuration)$(TargetExt)</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -115,6 +121,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <OutputFile>$(SolutionDir)$(ProjectName)_$(Platform)_$(Configuration)$(TargetExt)</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -133,6 +142,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <OutputFile>$(SolutionDir)$(ProjectName)_$(Platform)_$(Configuration)$(TargetExt)</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -143,6 +155,8 @@
     <ClInclude Include="..\..\..\core\tal\TAL.h" />
     <ClInclude Include="..\..\..\core\tal\talbody\TALBodyWindows.h" />
     <ClInclude Include="DaniTimer\DaniTimer.h" />
+    <ClInclude Include="DaniTimer\DaniTimerProperty.h" />
+    <ClInclude Include="DaniTimer\DaniTimerTypes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\core\DaniTimerCore.cpp" />

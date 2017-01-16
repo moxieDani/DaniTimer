@@ -47,5 +47,11 @@
     <ClInclude Include="..\..\..\core\DaniTimerCoreTypes.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="DaniTimer\DaniTimerProperty.h">
+      <Filter>porting</Filter>
+    </ClInclude>
+    <ClInclude Include="DaniTimer\DaniTimerTypes.h">
+      <Filter>porting</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

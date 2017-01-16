@@ -23,5 +23,8 @@
     <ClInclude Include="inc\DaniTimer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\porting\win32\VS2015\DaniTimer\DaniTimerProperty.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

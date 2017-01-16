@@ -20,8 +20,8 @@ namespace TimerCore
         INVALID_STATE              = 0x20000001,
         INIT_FAILED                = 0x20000002,
         START_FAILED               = 0x20000003,
-		SET_ONTIME_DELIGATE_FAILED = 0x20000004,
-		SET_ONTIME_INTERVAL_FAILED = 0x20000005,
+		PAUSE_FAILED               = 0x20000004,
+		SET_ONTIME_EVENT_FAILED    = 0x20000005,
 		SET_PROPERTY_FAILED        = 0x20000006
     };
 	

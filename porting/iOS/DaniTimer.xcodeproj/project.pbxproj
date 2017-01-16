@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1186997D1E2DA6FC00E3FCA5 /* DaniTimerTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 1186997C1E2DA6FC00E3FCA5 /* DaniTimerTypes.h */; };
 		BE2593711DE1FCD400BAC26D /* DaniTimerCoreTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2593701DE1FCD400BAC26D /* DaniTimerCoreTypes.h */; };
 		BE45F1FC1E2A7B4A00DCE56E /* DaniTimerProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C9900A1E28BCBB00106E93 /* DaniTimerProperty.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F4F5D2661DD4A7D300EB7324 /* DaniTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F5D25C1DD4A7D300EB7324 /* DaniTimer.framework */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1186997C1E2DA6FC00E3FCA5 /* DaniTimerTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DaniTimerTypes.h; path = ../../../../DaniTimer/porting/iOS/DaniTimer/DaniTimerTypes.h; sourceTree = "<group>"; };
 		11C9900A1E28BCBB00106E93 /* DaniTimerProperty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DaniTimerProperty.h; sourceTree = "<group>"; };
 		BE2593701DE1FCD400BAC26D /* DaniTimerCoreTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DaniTimerCoreTypes.h; path = ../../../core/DaniTimerCoreTypes.h; sourceTree = "<group>"; };
 		F4F5D25C1DD4A7D300EB7324 /* DaniTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DaniTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +109,7 @@
 				F4F5D25F1DD4A7D300EB7324 /* DaniTimer.h */,
 				F4F5D2761DD4A86F00EB7324 /* DaniTimer.mm */,
 				11C9900A1E28BCBB00106E93 /* DaniTimerProperty.h */,
+				1186997C1E2DA6FC00E3FCA5 /* DaniTimerTypes.h */,
 				F4F5D2601DD4A7D300EB7324 /* Info.plist */,
 			);
 			path = DaniTimer;
@@ -160,6 +163,7 @@
 			files = (
 				F4F5D26D1DD4A7D300EB7324 /* DaniTimer.h in Headers */,
 				BE45F1FC1E2A7B4A00DCE56E /* DaniTimerProperty.h in Headers */,
+				1186997D1E2DA6FC00E3FCA5 /* DaniTimerTypes.h in Headers */,
 				BE2593711DE1FCD400BAC26D /* DaniTimerCoreTypes.h in Headers */,
 				F4F5D2921DD4C10800EB7324 /* TALBodyMacOSX.h in Headers */,
 				F4F5D28A1DD4C0E600EB7324 /* DaniTimerCore.h in Headers */,

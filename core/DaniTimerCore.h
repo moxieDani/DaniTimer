@@ -1,7 +1,6 @@
 #ifndef DANI_TIMER_CORE_H_DEF
 #define DANI_TIMER_CORE_H_DEF
 
-#include <functional>
 #include "DaniTimerCoreTypes.h"
 #include "TAL.h"
 

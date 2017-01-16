@@ -12,73 +12,45 @@
 
 using namespace std;
 
-int main(int argc, const char * argv[]) {
-    cout << "Dani Timer test\n";
-    
-    DaniTimer timer;
-    if ( 1 == timer.stop())
-        cout << "Invalid sequence! -> call start first!" << endl;
-   
-    if ( 1 == timer.setStopTimeMilliSec(1000) )
-        cout << "Invalid sequence!(Set stop time failed.) -> Timer is already stopped!" << endl;
-    else
-        cout << "setStopTimeMilliSec(1000)"<< endl;
+#if defined _WIN32 || _WIN64
+#include <windows.h>
+#define SLEEP(x) Sleep(x*1000)
+#else
+#include <unistd.h>
+#define SLEEP(x) sleep(x)
+#endif
 
-    if ( 0 == timer.start())
-        cout << "Dani Timer started!" << endl;
-    else
-        cout << "Already started!" << endl;
-    
-    Sleep(1000);
-    if ( 1 == timer.setStopTimeMilliSec(7000) )
-        cout << "Invalid sequence!(Set stop time failed.) -> Timer is already stopped!" << endl;
-    else
-        cout << "setStopTimeMilliSec(7000)"<< endl;
-    
-    Sleep(1000);
-    if ( 0 == timer.start())
-        cout << "Dani Timer started!" << endl;
-    else
-        cout << "Already started!" << endl;
-    cout << "getCurrentTime(sec)" << timer.getCurrentTimeSec() << endl;
-    Sleep(1000);
-    cout << "getCurrentTime(Millisec)" << timer.getCurrentTimeMilliSec() << endl;
-    Sleep(1000);
-    cout << "getCurrentTime(Microsec)" << timer.getCurrentTimeMicroSec() << endl;
-    
-    if ( 1 == timer.setStopTimeMilliSec(5000) )
-        cout << "Invalid sequence!(Set stop time failed.) -> Timer is already stopped!" << endl;
-    else
-        cout << "setStopTimeMilliSec(5000)"<< endl;
-    
-    Sleep(1000);
-    if ( 0 == timer.stop())
-        cout << "Dani Timer stopped!" << endl;
-    else
-        cout << "Already stopped!" << endl;
-    
-    Sleep(1000);
-    if ( 0 == timer.stop())
-        cout << "Dani Timer stopped!" << endl;
-    else
-        cout << "Already stopped!" << endl;
-    cout << "getElapsedTimeSec(sec)" << timer.getElapsedTimeSec() << endl;
-    cout << "getElapsedTimeMilliSec(Millisec)" << timer.getElapsedTimeMilliSec() << endl;
-    
-    if ( 1 == timer.setStopTimeMilliSec(10000) )
-        cout << "Invalid sequence!(Set stop time failed.) -> Timer is already stopped!" << endl;
-    else
-        cout << "setStopTimeMilliSec(10000)"<< endl;
-    
-    Sleep(1000);
-    if ( 1 == timer.setStopTimeMilliSec(5000) )
-        cout << "Invalid sequence!(Set stop time failed.) -> Timer is already stopped!" << endl;
-    else
-        cout << "setStopTimeMilliSec(10000)"<< endl;
-    
-    Sleep(1000);
-    if ( 0 == timer.getCurrentTimeMicroSec() )
-        cout << "Invalid sequence! -> Timer is already stopped!" << endl;
-	Sleep(1000);
-    return 0;
+#include <iostream>
+#include "DaniTimer.h"
+
+using namespace std;
+
+int onTime(unsigned long long milliSec);
+
+int onTime(unsigned long long milliSec)
+{
+	cout << "onTime : " << milliSec << endl;
+	return 0;
+}
+int main(int argc, const char * argv[]) {
+	cout << "Dani Timer test\n";
+
+	DaniTimer timer;
+	if (0 == timer.setOnTime(onTime) )
+		cout << "========== setOnTime ========== " << endl;
+	else
+		cout << "Start Error" << endl;
+
+	if (0 == timer.start())
+		cout << "========== Dani Timer started! ========== " << endl;
+	else
+		cout << "Start Error" << endl;
+
+	SLEEP(3);
+	if (0 == timer.reset())
+		cout << "========== Dani Timer reset! ==========" << endl;
+	else
+		cout << "Reset Error!" << endl;
+	
+	return 0;
 }
