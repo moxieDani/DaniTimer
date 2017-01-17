@@ -3,7 +3,7 @@
 //  DaniTimer
 //
 //  Created by daniel-kisoon-kwon on 2016. 11. 10..
-//  Copyright © 2016년 daniel-kisoon-kwon. All rights reserved.
+//  Copyright © 2016 daniel-kisoon-kwon. All rights reserved.
 //
 
 #ifndef DANI_TIMER_PROPERTY_H

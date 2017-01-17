@@ -143,19 +143,19 @@ unsigned long long DaniTimerCore::getElapsedTimeMicroSec()
 	
 	if ( timerCountMode == TimerCore::CountMode::COUNTUP )
     {
-        ret = (targetBeginTimeMilliSec * 1e3) + ret;
+        ret = (unsigned long long)(targetBeginTimeMilliSec * 1e3) + ret;
         if ( (targetEndTimeMilliSec * 1e3) > 0 && ret > (targetEndTimeMilliSec * 1e3) )
         {
-            ret = targetEndTimeMilliSec * 1e3;
+            ret = (unsigned long long)(targetEndTimeMilliSec * 1e3);
             reset();
         }
     }
     else
     {
-        ret = (targetBeginTimeMilliSec * 1e3) - ret;
-        if (ret < targetEndTimeMilliSec * 1e3)
+        ret = ((unsigned long long)(targetBeginTimeMilliSec * 1e3)) - ret;
+        if (ret < (unsigned long long)(targetEndTimeMilliSec * 1e3))
         {
-            ret = targetEndTimeMilliSec * 1e3;
+            ret = (unsigned long long)(targetEndTimeMilliSec * 1e3);
             reset();
         }
     }
